@@ -1,0 +1,30 @@
+# 公式ページ
+
+* [npm](https://www.npmjs.com/)
+* [npm/npm (GitHub)](https://github.com/npm/npm)
+
+# 概要
+
+[Node.js]() 用のパッケージマネージャ。
+
+# インストール
+
+[nvm]() で導入する。
+
+# 使い方
+
+* `npm help <command>`
+    + ヘルプを表示
+* `npm init`
+    + 対話形式で `package.json` を設定する
+* `npm install <package>`
+    + パッケージをそのディレクトリにインストールする
+    + `npm i <package>` と略記できる
+    + `--save` を付けると dependencies の 1 つとしてインストールされる
+        - `-S` と略記できる？（help に存在しない……）
+    + `--save-dev` を付けると devDependencies の 1 つとしてインストールされる
+        - ビルドに必要だが動作に必要のないライブラリ（gulp プラグイン等）はこちら
+        - `-D` と略記できる？（help に存在しない……）
+* `npm install -g <package>`
+    + パッケージをグローバルインストールする。
+        - シェルから呼ぶことの多いパッケージ（coffee-script, typescript, gulp 等）はグローバルインストールするのがよい

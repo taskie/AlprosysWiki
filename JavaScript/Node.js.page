@@ -1,0 +1,30 @@
+# 公式ページ
+
+* [Node.js](https://nodejs.org/)
+* [joyent/node (GitHub)](https://github.com/joyent/node)
+
+# 概要
+
+サーバサイド JavaScript 処理系。
+
+# インストール
+
+[nvm]() で導入する。
+
+# サンプルプログラム
+
+## 簡易版 cat
+
+```javascript
+// cat.js
+var fs = require("fs");
+
+process.argv.slice(2).forEach(function (file) {
+    var text = fs.readFileSync(file, "utf8");
+    process.stdout.write(text);
+});
+```
+
+```
+$ node cat.js cat.js
+```

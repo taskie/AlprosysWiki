@@ -1,0 +1,98 @@
+# 公式ページ
+
+* [gulp.js - the streaming build system](http://gulpjs.com/)
+* [gulpjs/gulp (GitHub)](https://github.com/gulpjs/gulp)
+
+# 概要
+
+[Node.js]() 上で動作する JavaScript 製ビルドシステム。
+ファイルを監視し、更新を検知して自動コンパイルさせることも可能。
+
+# 使い方
+
+## 参考ページ
+
+gulp のチュートリアルとしては以下のページが詳しい。
+
+* [gulp.jsを使ってフロントエンドのビルドをする【webpack, stylus】 - yutaponのブログ](http://yutapon.hatenablog.com/entry/2014/12/06/123000)
+
+## gulpfile
+
+gulpfile.js を書くことでビルドの設定を行う（Make の Makefile、Rake の Rakefile.rb に相当）。
+
+あらかじめ `npm install -D coffee-script` しておくと gulpfile を [CoffeeScript]() で書ける。
+gulpfile に頻出する連想配列とコールバックが圧倒的に書きやすくなるので、このためだけに CoffeeScript を導入する価値があると思う（個人の感想）。
+
+## gulp.task
+
+CoffeeScript をコンパイルして JavaScript と SourceMap を吐くタスクを例示する。
+あらかじめ `npm install -D gulp-coffee gulp-sourcemaps` しておく（gulp 用のプラグインは npm に山ほど存在している）。
+
+```coffee
+gulp = require 'gulp'
+coffee = require 'gulp-coffee'
+sourcemaps = require 'gulp-sourcemaps'
+
+gulp.task 'coffee', ->
+  gulp
+    .src 'src/js/**/!(_)*.coffee'
+    .pipe sourcemaps.init()
+    .pipe coffee()
+    .pipe sourcemaps.write('.')
+    .pipe gulp.dest('tmp/js')
+```
+
+"the streaming build system" の名の通り、処理を `pipe` で連結していく。
+`gulp coffee` すると `src` の条件に一致するファイルがコンパイルされ、目的のファイルが `dest` で指定したディレクトリに生成される。
+
+gulp.task の第 2 引数にそのタスクの実行前に行うべきタスク（タスク名の配列）を指定できる。
+
+```coffee
+gulp.task 'default', ['coffee'], ->
+  return
+```
+
+ちなみに、`gulp` コマンドを単独で実行すると `default` タスクが走る。
+
+## watch
+
+CoffeeScript ファイルを監視してコンパイルを行う（先ほどの `coffee` タスクを走らせる）タスク。
+
+```coffee
+watch = require 'gulp-watch'
+
+gulp.task 'watch', ->
+  watch 'src/js/**/!(_)*.coffee', ->
+    gulp.start ['coffee']
+```
+
+# Tips
+
+## タスクのファイル分割
+
+[aseemk/requireDir](https://github.com/aseemk/requireDir) を使ってタスク毎にファイルを分割することが一般的なようだ。
+`gulpfile.coffee` には以下の内容のみを書く。
+
+```coffee
+requireDir = require 'require-dir'
+
+requireDir './gulp/tasks', {recurse: true}
+```
+
+参考ページでは、`gulp/config.coffee` に設定を書き、`gulp/tasks/*.coffee` がそれを `require '../config'` するという構成を採っている。
+
+## ファイルの削除 (clean/clobber)
+
+[sindresorhus/del](https://github.com/sindresorhus/del) を使う。
+`del` は非同期関数であり、渡されてきた `callback` 引数をそのまま渡すとよい。
+
+```coffee
+del = require 'del'
+
+gulp.task 'clean', (callback) ->
+  del ['./tmp/'], callback
+```
+
+### 参考ページ
+
+* [JavaScript - gulpfile.coffeeをtask毎に分割する - Qiita](http://qiita.com/KazIgu/items/25fc8406f2534a8dcb2a)
