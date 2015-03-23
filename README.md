@@ -1,2 +1,3 @@
 # ALPROSYS Wiki
-[wiki.alprosys.com](wiki.alprosys.com)
+
+[wiki.alprosys.com](http://wiki.alprosys.com)
