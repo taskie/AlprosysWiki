@@ -2,6 +2,10 @@
 
 * [creationix/nvm (GitHub)](https://github.com/creationix/nvm)
 
+# 概要
+
+Node.js/npm のバージョンを管理するツール。Ruby の rbenv 的なもの。
+
 # nvm のインストール
 
 ```

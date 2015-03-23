@@ -1,0 +1,30 @@
+# 公式ページ
+
+* [CoffeeScript](http://coffeescript.org/)
+* [jashkenas/coffeescript (GitHub)](https://github.com/jashkenas/coffeescript)
+
+# 概要
+
+JavaScript トラップ回避用糖衣言語。
+
+# インストール
+
+```
+$ npm install -g coffee-script
+```
+
+`coffee` は別のモジュールなので注意。`coffeescript` ではないことにも注意。
+
+# 使い方
+
+```
+$ coffee -c hoge.coffee
+```
+
+`-m` (`--map`) オプションを付けると SourceMap を生成する。
+
+`-w` (`--watch`) オプションを付けるとファイルを監視し、更新があると自動でコンパイルを行う。
+
+# Tips
+
+準備中

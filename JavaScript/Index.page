@@ -1,6 +1,28 @@
-* [Node.js]()
-* [npm]()
-* [nvm]()
+# Node.js
 
-* [gulp]()
-* [webpack]()
+## 基本
+
+[Node.js]()
+:   サーバサイド JavaScript 処理系
+
+[npm]()
+:   Node.js 用パッケージマネージャ
+
+[nvm]()
+:   Node.js/npm バージョン管理ツール
+
+## ビルドシステム
+
+[gulp]()
+:   タスクランナー
+
+[webpack]()
+:   モジュールバンドラー
+
+# altJS (alternative JavaScript)
+
+[TypeScript]()
+:   Microsoft 謹製静的型付け言語
+
+[CoffeeScript]()
+:   JavaScript トラップ回避用糖衣言語

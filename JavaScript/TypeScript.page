@@ -1,0 +1,31 @@
+# 公式ページ
+
+* [Welcome to TypeScript](http://www.typescriptlang.org/)
+
+# 概要
+
+Microsoft 謹製静的型付け altJS。
+
+# インストール
+
+```
+$ npm install -g typescript
+```
+
+# 使い方
+
+```
+$ tsc hoge.ts
+```
+
+`-w` (`--watch`) オプションでファイルの監視を開始し、更新があると自動でコンパイルを行う。
+
+`-t` (`--target`) オプションで吐く JavaScript (ECMAScript) のバージョンを `ES3`（デフォルト）、`ES5`、`ES6` (experimental) から選択できる。
+
+`--noEmitOnError` オプションを付けるとエラー時に JavaScript を吐かなくなる。
+
+`-m commonjs` (`--module commonjs`) とすると CommonJS スタイルのコードを吐く（`amd` も選択可）。
+
+# Tips
+
+準備中
