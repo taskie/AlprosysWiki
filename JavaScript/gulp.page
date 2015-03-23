@@ -14,6 +14,7 @@
 
 gulp のチュートリアルとしては以下のページが詳しい。
 
+* [タスクランナーgulp.js最速入門 - id:anatooのブログ](http://blog.anatoo.jp/entry/20140420/1397995711)
 * [gulp.jsを使ってフロントエンドのビルドをする【webpack, stylus】 - yutaponのブログ](http://yutapon.hatenablog.com/entry/2014/12/06/123000)
 
 ## gulpfile
