@@ -1,0 +1,30 @@
+# 公式ページ
+
+* [creationix/nvm (GitHub)](https://github.com/creationix/nvm)
+
+# nvm のインストール
+
+```
+$ git clone https://github.com/creationix/nvm.git ~/.nvm
+$ cd ~/.nvm 
+$ git checkout `git describe --abbrev=0 --tags`
+$ source ./nvm.sh
+```
+
+.bashrc, .zshrc 等に以下を記載する。
+
+```bash
+if [[ -d ~/.nvm ]]; then
+    export NODE_PATH=~/.nvm/lib/node_modules
+    source ~/.nvm/nvm.sh
+fi
+```
+
+# node, npm のインストール
+
+```
+$ nvm ls-remote
+$ nvm install v0.12.0
+$ node --version
+$ which npm
+```

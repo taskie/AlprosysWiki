@@ -1,0 +1,14 @@
+# 公式ページ
+
+* [webpack module bundler](http://webpack.github.io/)
+* [webpack/webpack (GitHub)](https://github.com/webpack/webpack)
+
+# 概要
+
+CommonJS/AMD スタイルの JavaScript のモジュールをブラウザで使えるように変換する。
+ローダーやプラグインも多数用意されている。
+やたら多機能で gulp との棲み分けが悩ましい。
+
+# 参考ページ
+
+* [webpackを使い倒す - Thujikun blog](http://thujikun.github.io/blog/2014/12/07/webpack/)
