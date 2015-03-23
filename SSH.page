@@ -1,0 +1,42 @@
+# 対話形式で公開鍵と秘密鍵を生成する
+
+```
+$ ssh-keygen -t rsa
+```
+
+# 公開鍵を接続先の authorized_keys に書き込む
+
+```
+$ ssh-copy-id machine
+```
+
+ユーザ名や公開鍵ファイルは以下のように指定する。
+
+```
+$ ssh-copy-id -i hoge_rsa.pub user@machine
+```
+
+## 参考ページ
+
+* [ShellScript - ssh の公開鍵の設定めんどい - Qiita](http://qiita.com/k_ui/items/72ada26499a3c182b47a)
+
+# ~/.ssh/config の設定例
+
+```
+Host hoge
+    HostName hoge.address
+    User user
+    IdentityFile ~/.ssh/hoge_rsa
+    LocalForward 1234 hoge:5678
+    GatewayPorts yes
+    PermitLocalCommand yes
+    LocalCommand tmux rename-window \<%n\>
+
+Host fuga
+    ProxyCommand ssh -W %h:%p hoge
+```
+
+## 参考ページ
+
+* [SSH_CONFIG (5)](http://www.unixuser.org/~euske/doc/openssh/jman/ssh_config.html)
+
