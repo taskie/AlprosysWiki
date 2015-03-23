@@ -69,6 +69,11 @@ gulp.task 'watch', ->
 
 # Tips
 
+## 参考ページ
+
+* [Gulp.js（全俺） Advent Calendar 2014 - Adventar](http://www.adventar.org/calendars/671)
+* [JavaScript - Gulpのすすめ - Qiita](http://qiita.com/KazIgu/items/20500827b06b9dbec08e)
+
 ## タスクのファイル分割
 
 [aseemk/requireDir (GitHub)](https://github.com/aseemk/requireDir) を使ってタスク毎にファイルを分割することが一般的なようだ。
