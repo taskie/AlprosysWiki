@@ -29,6 +29,7 @@ fi
 ```
 $ nvm ls-remote
 $ nvm install v0.12.0
+$ nvm alias default v0.12.0
 $ node --version
 $ which npm
 ```
