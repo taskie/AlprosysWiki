@@ -14,6 +14,7 @@
 
 gulp のチュートリアルとしては以下のページが詳しい。
 
+* [タスクランナーgulp.js最速入門 - id:anatooのブログ](http://blog.anatoo.jp/entry/20140420/1397995711)
 * [gulp.jsを使ってフロントエンドのビルドをする【webpack, stylus】 - yutaponのブログ](http://yutapon.hatenablog.com/entry/2014/12/06/123000)
 
 ## gulpfile
@@ -67,6 +68,11 @@ gulp.task 'watch', ->
 ```
 
 # Tips
+
+## 参考ページ
+
+* [Gulp.js（全俺） Advent Calendar 2014 - Adventar](http://www.adventar.org/calendars/671)
+* [JavaScript - Gulpのすすめ - Qiita](http://qiita.com/KazIgu/items/20500827b06b9dbec08e)
 
 ## タスクのファイル分割
 
