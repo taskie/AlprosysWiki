@@ -25,6 +25,76 @@ $ coffee -c hoge.coffee
 
 `-w` (`--watch`) オプションを付けるとファイルを監視し、更新があると自動でコンパイルを行う。
 
-# Tips
+# 利点
 
-準備中
+## `this` / `this.` を `@` と書ける
+
+塵も積もれば山。
+
+## 括弧を省略できる
+
+どうでもいい機能に見えるが、特に関数のアロー記法と組み合わさる際に力を発揮する。
+コード例は [JavaScript Promiseの本](http://azu.github.io/promises-book/) から引用。
+
+### JavaScript 版
+
+```javascript
+var promise = new Promise(function(resolve){
+    resolve(42);
+});
+promise.then(function(value){
+    console.log(value);
+}).catch(function(error){
+    console.error(error);
+});
+```
+
+### CoffeeScript 版
+
+```coffee
+promise = new Promise (resolve) ->
+    resolve 42
+
+promise
+    .then (value) ->
+        console.log value
+    .catch (error) ->
+        console.error error
+
+```
+
+## オブジェクトを楽に書ける
+
+コンマの抜けに悩まずに済む。
+この記法は CSON (CoffeeScript-Object-Notation) と呼ぶらしい。
+[bevry/cson (GitHub)](https://github.com/bevry/cson) の `cson2json`/`json2cson` で JSON との相互変換も可能。
+
+### JavaScript 版
+
+```javascript
+var obj = {
+    hoge: "hoge",
+    fuga: {
+        piyo: "piyo"
+    },
+    foo: [
+        1, 2, 3,
+        4, 5, 6,
+        7, 8, 9
+    ]
+}
+```
+
+### CoffeeScript 版
+
+```coffee
+obj =
+    hoge: "hoge"
+    fuga:
+        piyo: "piyo"
+    foo: [
+        1, 2, 3
+        4, 5, 6
+        7, 8, 9
+    ]
+```
