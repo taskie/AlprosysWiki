@@ -70,7 +70,7 @@ gulp.task 'watch', ->
 
 ## タスクのファイル分割
 
-[aseemk/requireDir](https://github.com/aseemk/requireDir) を使ってタスク毎にファイルを分割することが一般的なようだ。
+[aseemk/requireDir (GitHub)](https://github.com/aseemk/requireDir) を使ってタスク毎にファイルを分割することが一般的なようだ。
 `gulpfile.coffee` には以下の内容のみを書く。
 
 ```coffee
@@ -81,9 +81,13 @@ requireDir './gulp/tasks', {recurse: true}
 
 参考ページでは、`gulp/config.coffee` に設定を書き、`gulp/tasks/*.coffee` がそれを `require '../config'` するという構成を採っている。
 
+### 参考ページ
+
+* [JavaScript - gulpfile.coffeeをtask毎に分割する - Qiita](http://qiita.com/KazIgu/items/25fc8406f2534a8dcb2a)
+
 ## ファイルの削除 (clean/clobber)
 
-[sindresorhus/del](https://github.com/sindresorhus/del) を使う。
+[sindresorhus/del (GitHub)](https://github.com/sindresorhus/del) を使う。
 `del` は非同期関数であり、渡されてきた `callback` 引数をそのまま渡すとよい。
 
 ```coffee
@@ -92,7 +96,3 @@ del = require 'del'
 gulp.task 'clean', (callback) ->
   del ['./tmp/'], callback
 ```
-
-### 参考ページ
-
-* [JavaScript - gulpfile.coffeeをtask毎に分割する - Qiita](http://qiita.com/KazIgu/items/25fc8406f2534a8dcb2a)
