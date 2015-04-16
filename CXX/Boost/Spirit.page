@@ -1,0 +1,281 @@
+---
+title: C++/Boost/Spirit
+...
+
+# 公式ページ
+
+* [Spirit](http://www.boost.org/libs/spirit/)
+    * [Qi - Writing Parsers](http://www.boost.org/doc/libs/release/libs/spirit/doc/html/spirit/qi.html)
+        * [Tutorials](http://www.boost.org/doc/libs/release/libs/spirit/doc/html/spirit/qi/tutorials.html)
+
+# 参考ページ
+
+* [letsboost::spirit](http://www.kmonos.net/alang/boost/classes/spirit.html)
+* [Tutorials からはじめる Boost.Spirit.Qi - Logfiles](http://d.hatena.ne.jp/moistx/20131208/1386354956)
+* [文鳥言語とBoost.Spirit.Qi Tips - C++ Advent Calendar 2013(11日目) - yutopp's blog](http://yutopp.hateblo.jp/entry/2013/12/11/014837)
+
+# サンプルコード
+
+* 以下、C++11 (`-std=c++11`) の機能を利用
+
+## `(1 2 3)` のような文字列を `std::vector<int>` にする例
+
+* [全コード (qi_test_1.cc)](Spirit/qi_test_1.cc)
+
+### ヘッダ
+
+```c++
+#include <iostream>
+#include <string>
+
+#include <boost/spirit/include/qi.hpp>
+#include <boost/spirit/include/phoenix_core.hpp>
+#include <boost/spirit/include/phoenix_operator.hpp>
+#include <boost/spirit/include/phoenix_fusion.hpp>
+#include <boost/spirit/include/phoenix_stl.hpp>
+#include <boost/fusion/include/adapt_struct.hpp>
+#include <boost/variant/recursive_variant.hpp>
+```
+
+### データ構造
+
+```c++
+// http://d.hatena.ne.jp/kikairoya/20110109/1294568213
+#define TRANSFORM_STRUCT_MEMBER(ign, name, member) (decltype(name::member), member)
+#define FUSION_ADAPT_STRUCT_AUTO(name, members) \
+  BOOST_FUSION_ADAPT_STRUCT(name, BOOST_PP_SEQ_FOR_EACH(TRANSFORM_STRUCT_MEMBER, name, members))
+
+// Data Structure
+namespace client
+{
+  struct MyStruct
+  {
+    std::vector<int> vec;
+  };
+}
+FUSION_ADAPT_STRUCT_AUTO(client::MyStruct, (vec));
+```
+
+* `FUSION_ADAPT_STRUCT_AUTO` は [BOOST_FUSION_ADAPT_STRUCTをちょっと便利に - kikairoyaの日記](http://d.hatena.ne.jp/kikairoya/20110109/1294568213) を参照
+    * `namespace client { ... }` の外で展開する必要がある（内側だとエラーになる）
+
+### 文法定義
+
+```c++
+// Grammer
+namespace client
+{
+  namespace fusion = boost::fusion;
+  namespace phoenix = boost::phoenix;
+  namespace qi = boost::spirit::qi;
+
+  template <typename Iterator, typename SkipGrammerType>
+  struct Grammer : qi::grammar<Iterator, MyStruct(), SkipGrammerType>
+  {
+    template <typename T>
+    using Rule = qi::rule<Iterator, T, SkipGrammerType>;
+    
+    Rule<MyStruct()> mainRule;
+    Rule<int()> numberRule;
+    
+    Grammer() : Grammer::base_type(mainRule)
+    {
+      using namespace qi::labels;
+      
+      mainRule =
+	qi::lit('(')
+	>> *numberRule [phoenix::push_back(phoenix::at_c<0>(_val), _1)]
+	>> qi::lit(')');
+      numberRule = qi::int_;
+    }
+  };
+}
+```
+
+### main 関数
+
+```c++
+int main()
+{
+  namespace qi = boost::spirit::qi;
+  namespace ascii = boost::spirit::ascii;
+
+  using Grammer = client::Grammer<std::string::const_iterator, ascii::space_type>;
+  Grammer grammer;
+
+  std::string buf;
+  std::cout << "> ";
+  while (std::getline(std::cin, buf)) {
+    auto it = buf.cbegin();
+    auto end = buf.cend();
+    client::MyStruct ast;
+    if (qi::phrase_parse(it, end, grammer, ascii::space, ast) && it == end) {
+      for (int x : ast.vec) std::cout << x << ' ';
+      std::cout << "\n> ";
+    } else {
+      std::string s(buf.cbegin(), it);
+      std::string t(it, end);
+      std::cout << s << "/ ! /" << t << "\n> ";
+    }
+  }
+  std::cout << '\n';
+}
+```
+
+* `qi::phrase_parse` に grammer と構造体を与える
+
+### 実行例
+
+```text
+> (1 2 3)
+1 2 3
+> ( 4 16 64  )
+4 16 64
+> (42)
+42
+> ()
+
+> (1 2 3(
+/ ! /(1 2 3(
+> (1 2 3))
+(1 2 3)/ ! /)
+```
+
+## 再帰的なデータ構造を実現する
+
+* [全コード (qi_test_2.cc)](Spirit/qi_test_2.cc)
+* 以下、変更点のみ記載
+
+### データ構造
+
+```c++
+// Data Structure
+namespace client
+{
+  struct MyStruct;
+  using MyStructNode = boost::variant<int, boost::recursive_wrapper<MyStruct>>;
+  struct MyStruct
+  {
+    std::vector<MyStructNode> vec;
+  };
+}
+FUSION_ADAPT_STRUCT_AUTO(client::MyStruct, (vec));
+```
+
+* `boost::recursive_wrapper` を用いる
+
+### 文法定義
+
+```c++
+    Rule<MyStruct()> mainRule;
+    Rule<MyStructNode()> nodeRule;
+    Rule<int()> numberRule;
+    
+    Grammer() : Grammer::base_type(mainRule)
+    {
+      using namespace qi::labels;
+      
+      mainRule =
+	qi::lit('(')
+	>> *nodeRule [phoenix::push_back(phoenix::at_c<0>(_val), _1)]
+	>> qi::lit(')');
+      nodeRule = (mainRule | numberRule) [_val = _1];
+      numberRule = qi::int_;
+    }
+```
+
+### 表示
+
+```c++
+// Printer
+namespace client
+{
+  struct MyStructPrinter
+  {
+    void operator()(const MyStruct & ast) const;
+  };
+
+  struct MyStructNodePrinter : boost::static_visitor<>
+  {
+    void operator()(const MyStruct & ast) const
+    {
+      MyStructPrinter()(ast);
+    }
+    
+    void operator()(int x) const
+    {
+      std::cout << x;
+    }
+  };
+
+  void MyStructPrinter::operator()(const MyStruct & ast) const
+  {
+    std::cout << '[';
+    for (auto && variant : ast.vec) {
+      boost::apply_visitor(MyStructNodePrinter(), variant);
+      std::cout << ", ";
+    }
+    std::cout << ']';
+  }
+}
+```
+
+* `boost::static_visitor<>` を継承した関数オブジェクトに対して `boost::apply_visitor` を用いることで `boost::variant` の型で分岐できる
+
+### main 関数
+
+```c++
+  Grammer grammer;
+  client::MyStructPrinter printer;
+```
+
+```c++
+    if (qi::phrase_parse(it, end, grammer, ascii::space, ast) && it == end) {
+      printer(ast);
+      std::cout << "\n> ";
+```
+
+### 実行例
+
+```text
+> (1 2 3)
+[1, 2, 3, ]
+> (1 (2 (3 (4 5) 6) 7) 8)
+[1, [2, [3, [4, 5, ], 6, ], 7, ], 8, ]
+> (1 ((2 3) ()))
+[1, [[2, 3, ], [], ], ]
+> (1 (2 (3))
+/ ! /(1 (2 (3))
+> (1 (2 (3))))
+(1 (2 (3)))/ ! /)
+```
+
+## コンマ区切りにする
+
+### 文法定義
+
+```c++
+      mainRule =
+	qi::lit('(')
+	>> -(nodeRule[phoenix::push_back(phoenix::at_c<0>(_val), _1)] % qi::lit(','))
+	>> qi::lit(')');
+```
+
+* `%` で区切り文字を指定し連続して読み込むことが可能
+* `-` はパターンが 0 回もしくは 1 回出現することを表す
+    + こうすることで空括弧を認めるようになる
+
+### 実行例
+
+```
+> (1,2,3)
+[1, 2, 3, ]
+> ()
+[]
+> (1, (2, (3, ()), (4, 5)), 6)
+[1, [2, [3, [], ], [4, 5, ], ], 6, ]
+> (42)
+[42, ]
+> (42,)
+/ ! /(42,)
+```

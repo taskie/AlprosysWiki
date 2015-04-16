@@ -1,0 +1,15 @@
+---
+title: C++/Eigen
+...
+
+# 公式ページ
+
+* [Eigen](http://eigen.tuxfamily.org/)
+    * [API documentation](http://eigen.tuxfamily.org/dox/)
+* [eigen / eigen — Bitbucket](https://bitbucket.org/eigen/eigen/)
+
+# 参考ページ
+
+* [[PDF] 公開コピー誌 行列ライブラリ Eigen のメモ - 暗黒通信団](http://mikaka.org/~kana/dl/pdf/pdf-eigennote.pdf)
+* [でらうま倶楽部 : Eigen - C++で使える線形代数ライブラリ](http://blog.livedoor.jp/tek_nishi/archives/8623876.html)
+* [線形代数ライブラリの速度比較 - .Regenschauer 雑記帳](http://sigure430.hatenablog.com/entry/2014/12/13/162149)
