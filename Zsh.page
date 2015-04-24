@@ -1,0 +1,19 @@
+# 公式ページ
+
+* [Zsh](http://www.zsh.org/)
+* [ZSH - THE Z SHELL](http://zsh.sourceforge.net/)
+
+# 参考ページ
+
+* [BashとZshの違いでのハマりどころ](http://rcmdnk.github.io/blog/2013/12/26/computer-bash-zsh/)
+
+* [zsh補完関数の書き方(訳)](http://www.ayu.ics.keio.ac.jp/~mukai/translate/write_zsh_functions.html)
+* [zsh で source して使うプラグインを作るのは止めにしよう - Qiita](http://qiita.com/mollifier/items/6fdeff2750fe80f830c8)
+
+* [zshのchpwdの設定 - よんちゅBlog](http://yonchu.hatenablog.com/entry/20120507/1336409280)
+* [Zsh - Enter で ls と git status を表示すると便利 - Qiita](http://qiita.com/yuyuchu3333/items/e9af05670c95e2cc5b4d)
+
+* [tmuxで色んなホストにsshする時に便利な.ssh/config - Qiita](http://qiita.com/catatsuy/items/631d1d5d0b357082ba74)
+* [tmuxでSSH時に変更したwindow-nameを自動でもとに戻す - Qiita](http://qiita.com/yuku_t/items/4ffaa516914e7426419a)
+
+* [zsh の vcs_info に独自の処理を追加して stash 数とか push していない件数とか何でも表示する - Qiita](http://qiita.com/mollifier/items/8d5a627d773758dd8078)
