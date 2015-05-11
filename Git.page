@@ -6,9 +6,19 @@
 * [Git チュートリアルとトレーニング| Atlassian](https://www.atlassian.com/ja/git/)
 
 * [gitでアレを元に戻す108の方法 - TIM Labs](http://labs.timedia.co.jp/2011/08/git-undo-999.html)
-
 * [gitリポジトリを特定のcommitバージョンまで戻す方法 - AorBorF](http://d.hatena.ne.jp/amacou/20090117/1232201229)
-* [巨大なリポジトリを Git で上手く扱う方法 | Atlassian Japan](http://japan.blogs.atlassian.com/2014/05/handle-big-repositories-git/)
 * [GitのHEAD^ HEAD~やらダブルドット トリプルドットやら | アライドアーキテクツ エンジニアブログ](http://tech.aainc.co.jp/?p=6740)
 
+* [git submodule は癖がすごいとの噂だったが素直につきあっていけそうという話 | deadwood](http://www.d-wood.com/blog/2014/05/22_6257.html)
+
+* [git の運用指針 - Life like a clown](http://d.hatena.ne.jp/tt_clown/20130412/git_management)
+* [ぼっちプログラマがチームに入る前に知っておきたい６つの git コマンド](http://blog.layer8.sh/ja/2013/04/08/best-git-commands-for-the-lonely-programmer/)
+* [Gitブランチを使いこなすgit-flow／GitHub Flow入門（1）：いまさら聞けない、成功するブランチモデルとgit-flowの基礎知識 (1/2) - ＠IT](http://www.atmarkit.co.jp/ait/articles/1311/18/news017.html)
+
+* [.gitconfigに設定してるaliasなどのまとめ - ( ꒪⌓꒪) ゆるよろ日記](http://yuroyoro.hatenablog.com/entry/20101008/1286531851)
+
+* [巨大なリポジトリを Git で上手く扱う方法 | Atlassian Japan](http://japan.blogs.atlassian.com/2014/05/handle-big-repositories-git/)
+
 * [Git ログの圧縮法 - 野良C++erの雑記帳](http://d.hatena.ne.jp/gintenlabo/20110523/1306159450)
+
+* [First commit が git rebase -i できない問題 → git rebase -i --root でできる - 納豆には卵を入れる派です。](http://d.hatena.ne.jp/ken_c_lo/20130421/1366558065)
