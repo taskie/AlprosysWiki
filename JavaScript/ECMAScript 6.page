@@ -1,0 +1,110 @@
+# for ... of
+
+```javascript
+for (var x of [2, 3, 5]) {
+    console.log(x);
+}
+```
+
+```text
+2
+3
+5
+```
+
+# class
+
+```javascript
+class Greeter
+{
+    constructor () {
+        this.message = "hello";
+    }
+    greet () {
+        console.log(this.message);
+    }
+}
+
+class RepeatGreeter extends Greeter
+{
+    constructor () {
+        super();
+        this.repeat = 3;
+    }
+    greet () {
+        for (var i = 0; i < this.repeat; ++i) {
+            super.greet();
+        }
+    }
+}
+
+let greeter = new RepeatGreeter();
+greeter.greet();
+```
+
+# arrow functions
+
+```javascript
+console.log([2, 3, 5].map(x => x * x));
+[2, 3, 5].forEach((x, i) => {
+    console.log(i, x);
+});
+```
+
+# let
+
+## var 版（誤）
+
+```javascript
+var fs = [];
+for (var i = 0; i < 3; ++i) {
+    fs[i] = function () { return i; };
+}
+for (var j = 0; j < 3; ++j) {
+    console.log(fs[j]());
+}
+```
+
+```text
+3
+3
+3
+```
+
+## var 版（正）
+
+```javascript
+var fs = [];
+for (var i = 0; i < 3; ++i) {
+    fs[i] = (function (i) {
+        return function () { return i; };
+    })(i);
+}
+for (var j = 0; j < 3; ++j) {
+    console.log(fs[j]());
+}
+```
+
+```text
+0
+1
+2
+```
+
+## ES6 版
+
+```javascript
+var fs = [];
+for (let i = 0; i < 3; ++i) {
+    fs[i] = () => { return i; };
+}
+for (var f of fs) {
+    console.log(f());
+}
+```
+
+```text
+0
+1
+2
+```
