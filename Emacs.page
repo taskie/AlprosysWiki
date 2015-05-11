@@ -1,0 +1,36 @@
+# 公式ページ
+
+* [GNU Emacs - GNU Project - Free Software Foundation (FSF)](http://www.gnu.org/software/emacs/)
+
+# Emacs Lisp
+
+init-loader
+:    [emacs-jp/init-loader](https://github.com/emacs-jp/init-loader)
+:    [init-loader.el と package.el を導入して快適 Emacs ライフ - Qiita](http://qiita.com/catatsuy/items/5f1cd86e2522fd3384a0)
+
+undo-tree
+:    [EmacsWiki: Undo Tree](http://www.emacswiki.org/emacs/UndoTree)
+:    [undo-tree.el の導入 - とりあえず暇だったし何となく始めたブログ](http://d.hatena.ne.jp/khiker/20100123/undo_tree)
+
+sequential-command
+:    [EmacsWiki: sequential-command.el](http://emacswiki.org/emacs/sequential-command.el)
+:    [同じコマンドを連続実行することで挙動を変える（行頭→先頭など） sequential-command.el をリリース - http://rubikitch.com/に移転しました](http://d.hatena.ne.jp/rubikitch/20090219/sequential_command)
+
+foreign-regexp
+:    [k-talo/foreign-regexp.el](https://github.com/k-talo/foreign-regexp.el)
+:    [emacsの正規表現をもっと便利に使う - $shibayu36-&gt;blog;](http://blog.shibayu36.org/entry/2013/01/15/201827)
+
+anzu
+:    [syohex/emacs-anzu](https://github.com/syohex/emacs-anzu)
+:    [Emacs - anzu.elの紹介 - Qiita](http://qiita.com/syohex/items/56cf3b7f7d9943f7a7ba)
+:    [anzu - Emacs JP](http://emacs-jp.github.io/packages/mode-line/anzu.html)
+
+git-gutter
+:    [syohex/emacs-git-gutter](https://github.com/syohex/emacs-git-gutter)
+:    [syohex/emacs-git-gutter-fringe](https://github.com/syohex/emacs-git-gutter-fringe)
+:    [Emacs - git-gutter.elの紹介 - Qiita](http://qiita.com/syohex/items/a669b35fbbfcdda0cbf2)
+:    [nonsequitur/git-gutter-plus](https://github.com/nonsequitur/git-gutter-plus)
+
+popwin
+:    [m2ym/popwin-el](https://github.com/m2ym/popwin-el)
+:    [ヘルプバッファや補完バッファをポップアップで表示してくれるpopwin.elをリリースしました - Functional Emacser](http://d.hatena.ne.jp/m2ym/20110120/1295524932)
