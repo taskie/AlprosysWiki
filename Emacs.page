@@ -47,3 +47,7 @@ popwin
 volatile-highlights
 :    [k-talo/volatile-highlights.el](https://github.com/k-talo/volatile-highlights.el)
 :    [一定時間だけ指定範囲をハイライトする Emacs Lisp | anobota](http://haraita9283.blog98.fc2.com/blog-entry-412.html)
+
+yasnippet
+:    [capitaomorte/yasnippet](https://github.com/capitaomorte/yasnippet)
+:    [yasnippet 8.0の導入からスニペットの書き方、anything/helm/auto-completeとの連携 - Web学び](http://fukuyama.co/yasnippet)
