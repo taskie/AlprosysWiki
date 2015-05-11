@@ -17,10 +17,14 @@
 * [Filesystem Hierarchy Standard - Wikipedia](http://ja.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
 
 * [Linux共有ライブラリの簡単なまとめ - wagavulinの日記](http://d.hatena.ne.jp/wagavulin/20091026/1256577635)
+* [Linux の共有ライブラリを作るとき PIC でコンパイルするのはなぜか - bkブログ](http://0xcc.net/blog/archives/000107.html)
 * [configureのbuild、host、targetの違い - maminusのメモか何か](http://d.hatena.ne.jp/maminus/20100129/1264781242)
 
 * [いまさらxargsの便利さを主張してみる — ディノオープンラボラトリ](http://openlab.dino.co.jp/2008/02/20/133431188.html)
 * [diff & patch コマンドでのパッチを適用する方法 - hogehoge foobar Blog Style5](http://d.hatena.ne.jp/mrgoofy33/20101019/1287500809)
+
+* [opensslでRSA暗号と遊ぶ - ろば電子が詰まっている](http://d.hatena.ne.jp/ozuma/20130510/1368114329)
+* [オレオレ証明書をopensslで作る（詳細版） - ろば電子が詰まっている](http://d.hatena.ne.jp/ozuma/20130511/1368284304)
 
 * [linux - Best way to kill all child processes - Stack Overflow](http://stackoverflow.com/questions/392022/best-way-to-kill-all-child-processes)
 
