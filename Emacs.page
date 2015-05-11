@@ -2,11 +2,20 @@
 
 * [GNU Emacs - GNU Project - Free Software Foundation (FSF)](http://www.gnu.org/software/emacs/)
 
+# 参考ページ
+
+* [Emacsパッケージ特集 - Qiita](http://qiita.com/hottestseason/items/1e8a46ad1ebcf7d0e11c)
+
 # Emacs Lisp
 
 init-loader
 :    [emacs-jp/init-loader](https://github.com/emacs-jp/init-loader)
 :    [init-loader.el と package.el を導入して快適 Emacs ライフ - Qiita](http://qiita.com/catatsuy/items/5f1cd86e2522fd3384a0)
+
+helm
+:    [emacs-helm/helm](https://github.com/emacs-helm/helm)
+:    [helm.elをインストールしてみた - プログラミングのメモ](http://konbu13.hatenablog.com/entry/2014/01/15/223014)
+:    [Helm をストレスなく使うための個人的な設定 - あらびき日記](http://d.hatena.ne.jp/a_bicky/20140104/1388822688)
 
 undo-tree
 :    [EmacsWiki: Undo Tree](http://www.emacswiki.org/emacs/UndoTree)
@@ -34,3 +43,7 @@ git-gutter
 popwin
 :    [m2ym/popwin-el](https://github.com/m2ym/popwin-el)
 :    [ヘルプバッファや補完バッファをポップアップで表示してくれるpopwin.elをリリースしました - Functional Emacser](http://d.hatena.ne.jp/m2ym/20110120/1295524932)
+
+volatile-highlights
+:    [k-talo/volatile-highlights.el](https://github.com/k-talo/volatile-highlights.el)
+:    [一定時間だけ指定範囲をハイライトする Emacs Lisp | anobota](http://haraita9283.blog98.fc2.com/blog-entry-412.html)
