@@ -27,6 +27,8 @@ $ coffee -c hoge.coffee
 
 # 利点
 
+`TypeScript` および `ECMAScript 6` にない利点のみを挙げる。
+
 ## `this` / `this.` を `@` と書ける
 
 塵も積もれば山。
@@ -98,3 +100,28 @@ obj =
         7, 8, 9
     ]
 ```
+
+## `null` / `undefined` チェックの演算子がある
+
+`?` を置くことで `null` / `undefined` のチェックができる。
+ドット演算子の前や関数呼び出し演算子の前にも置くことができる（`ReferenceError` が発生しない）。
+
+```coffee
+obj?
+obj?.key
+f?()
+```
+
+# 欠点
+
+## JavaScript の上位互換ではない
+
+JavaScript の（ほぼ）上位互換である [TypeScript]() のように JavaScript を生で直接埋め込めるわけではない（バッククオート(\`) で囲むことで埋め込むこと自体は可能）（module にして require するという手もあるが）。
+
+キーワードや演算子の意味も JavaScript と CoffeeScript とで異なっているものがあり新たに覚える必要がある（CoffeeScript の `==` は JavaScript の `===` に相当する等）。
+
+[ECMAScript 6]() の `for ... in`, `for ... of` と CoffeeScript の `for ... in`, `for ... of` は意味がほぼ真逆だったりする。
+
+## コピペ耐性が低め
+
+インデント言語の宿命。
