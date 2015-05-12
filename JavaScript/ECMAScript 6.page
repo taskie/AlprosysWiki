@@ -10,6 +10,8 @@
 [Babel]() を使う。
 以下、[TypeScript]() (tsc) でも使える（個人的によく使う）構文・ライブラリを挙げる。
 
+* [ECMAScript6 - TypeScriptとECMAScript 6 - Qiita](http://qiita.com/vvakame/items/ae198ac3589f569d043b)
+
 # 構文
 
 ## 列挙 (for ... of)
@@ -180,6 +182,68 @@ f(...[2, 3, 5]);  // => 2 3 5
 ```javascript
 let a = 2, b = 3;
 console.log(`${a} + ${b} = ${a + b}`);  // => 2 + 3 = 5
+```
+
+## import / export
+
+* [Babelで理解するEcmaScript6の import / export - Qiita](http://qiita.com/suisho/items/41168a50904242005271)
+
+### CommonJS 版
+
+```javascript
+// hello.js
+function hello() { console.log("Hello, world!"); }
+module.exports = { hello: hello };
+```
+
+```javascript
+// app.js
+var hello = require("./hello");
+hello.hello();
+```
+
+```
+$ node app.js
+Hello, world!
+```
+
+### ES6 版 (`import * as Foo from "foo"`)
+
+```javascript
+// hello.js
+export function hello() { console.log("Hello, world!"); }
+```
+
+```javascript
+// app.js
+import * as hello from "./hello";
+hello.hello();
+```
+
+```
+$ babel-node app.js
+Hello, world!
+```
+
+### ES6 版 (`import { Foo } from "foo"`)
+
+```javascript
+// app.js
+import { hello } from "./hello";
+hello();
+```
+
+### ES6 版 (`default`, `import Foo from "foo"`)
+
+```javascript
+// hello.js
+export default function hello() { console.log("Hello, world!"); }
+```
+
+```javascript
+// app.js
+import hello from "./hello";
+hello();
 ```
 
 # ライブラリ
