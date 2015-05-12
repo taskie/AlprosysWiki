@@ -1,0 +1,41 @@
+# 公式ページ
+
+* [Babel · The compiler for writing next generation JavaScript](http://babeljs.io/)
+* [babel/babel (GitHub)](https://github.com/babel/babel)
+
+# 概要
+
+次世代の JavaScript を旧世代の JavaScript に変換する。旧名 6to5 ([ECMAScript 6]() → ECMAScript 5)。
+
+# インストール
+
+```
+$ npm install -g babel
+```
+
+# 使い方
+
+```
+$ babel input.js -o output.js
+```
+
+`-o` オプションが無い場合標準出力に変換後の JavaScript が出力される。
+
+`babel-node` というコマンドで変換と同時に node 上で実行もできる。
+
+```
+$ babel-node input.js
+```
+
+個人的には [webpack]() の [babel-loader](https://github.com/babel/babel-loader) を使うことが多い。
+
+```
+$ npm i -D babel-loader
+```
+
+# Tips
+
+## `"use strict"` しない
+
+`--blacklist useStrict` オプションを付けるとファイルの先頭で `"use strict";` されなくなる。
+`eval` 関数を使わざるを得ない場合等に有効。
