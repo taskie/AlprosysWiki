@@ -1,4 +1,18 @@
-# for ... of
+# 参考リンク
+
+* [Mozilla における ECMAScript 6 のサポート - JavaScript | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/ECMAScript_6_support_in_Mozilla)
+* [ECMAScript 6 compatibility table](http://kangax.github.io/compat-table/es6/)
+* [ECMAScript 6の新しい構文をつかってみる#1 ｜ Developers.IO](http://dev.classmethod.jp/client-side/javascript/es6-2/)
+* [ECMAScript 6の新しい構文をつかってみる#2 ｜ Developers.IO](http://dev.classmethod.jp/server-side/node-js-server-side/es6-3/)
+
+# ES6 を試す
+
+[Babel]() を使う。
+以下、[TypeScript]() (tsc) でも使える（個人的によく使う）構文・ライブラリを挙げる。
+
+# 構文
+
+## 列挙 (for ... of)
 
 ```javascript
 for (var x of [2, 3, 5]) {
@@ -12,7 +26,7 @@ for (var x of [2, 3, 5]) {
 5
 ```
 
-# class
+## クラス (class)
 
 ```javascript
 class Greeter
@@ -42,7 +56,13 @@ let greeter = new RepeatGreeter();
 greeter.greet();
 ```
 
-# arrow functions
+```
+hello
+hello
+hello
+```
+
+## 関数のアロー表記 (arrow functions)
 
 ```javascript
 console.log([2, 3, 5].map(x => x * x));
@@ -51,9 +71,9 @@ console.log([2, 3, 5].map(x => x * x));
 });
 ```
 
-# let
+## ブロックスコープ変数 (let)
 
-## var 版（誤）
+### var 版（誤）
 
 ```javascript
 var fs = [];
@@ -71,7 +91,7 @@ for (var j = 0; j < 3; ++j) {
 3
 ```
 
-## var 版（正）
+### var 版（正）
 
 ```javascript
 var fs = [];
@@ -91,7 +111,7 @@ for (var j = 0; j < 3; ++j) {
 2
 ```
 
-## ES6 版
+### let (ES6) 版
 
 ```javascript
 var fs = [];
@@ -107,4 +127,87 @@ for (var f of fs) {
 0
 1
 2
+```
+
+## Object の shorthand properties
+
+```javascript
+let a = 2, b = 3;
+console.log({a, b});  // => { a: 2, b: 3 }
+```
+
+## 分割代入 (destructuring)
+
+```javascript
+let [x, y] = [2, 3];
+console.log(x, y);  // => 2 3
+```
+
+```javascript
+let {x, y} = {x: 2, y: 3};
+console.log(x, y);  // => 2 3
+```
+
+```javascript
+let {x: a, y: b} = {x: 2, y: 3};
+console.log(a, b);  // => 2 3
+```
+
+## デフォルト引数 (default function parameters)
+
+```javascript
+let f = (x, y = 2) => x * y;
+console.log(f(3));     // => 6
+console.log(f(3, 3));  // => 9
+```
+
+## 可変長引数を配列で受け取る (rest parameters)
+
+```javascript
+let f = (x, ...ys) => console.log(x, ys);
+f(2, 3, 5);  // => 2 [ 3, 5 ]
+```
+
+## 配列を可変長引数として渡す (spread operator)
+
+```javascript
+let f = (x, y, z) => console.log(x, y, z);
+f(...[2, 3, 5]);  // => 2 3 5
+```
+
+## テンプレート文字列 (template strings)
+
+```javascript
+let a = 2, b = 3;
+console.log(`${a} + ${b} = ${a + b}`);  // => 2 + 3 = 5
+```
+
+# ライブラリ
+
+## Promise
+
+```javascript
+new Promise((resolve, reject) => {
+    resolve("A");
+}).then((str) => {
+    console.log(`a: ${str}`);
+    return new Promise((resolve, reject) => {
+        resolve("B");
+    }).then((str) => {
+        console.log(`b: ${str}`);
+        return "C";
+    });
+}).then((str) => {
+    console.log(`c: ${str}`);
+    throw new Error("D");
+}).catch((err) => {
+    console.log(err);
+});
+```
+
+```
+a: A
+b: B
+c: C
+[Error: D]
 ```
