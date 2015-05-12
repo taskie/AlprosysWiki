@@ -30,6 +30,8 @@ for (var x of [2, 3, 5]) {
 
 ## クラス (class)
 
+### コンストラクタ・継承
+
 ```javascript
 class Greeter
 {
@@ -62,6 +64,33 @@ greeter.greet();
 hello
 hello
 hello
+```
+
+### setter / getter
+
+```javascript
+class Greeter
+{
+    constructor () {
+        this.message = "hello";
+    }
+    set message (message) {
+        this._message = message + "!";
+    }
+    get message () {
+        return this._message + "?";
+    }
+    greet () {
+        console.log(this.message);
+    }
+}
+
+let greeter = new Greeter();
+greeter.greet();
+```
+
+```
+hello!?
 ```
 
 ## 関数のアロー表記 (arrow functions)
