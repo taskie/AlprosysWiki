@@ -160,6 +160,24 @@ for (var f of fs) {
 2
 ```
 
+## 定数 (const)
+
+```javascript
+const answer = 42;
+answer = 0;
+```
+
+```
+$ babel const.js
+...
+SyntaxError: const.js: Line 2: "answer" is read-only
+```
+
+```
+$ tsc const.ts
+const.ts(2,1): error TS2450: Left-hand side of assignment expression cannot be a constant.
+```
+
 ## Object の shorthand properties
 
 ```javascript
