@@ -7,6 +7,8 @@
 
 次世代の JavaScript を旧世代の JavaScript に変換する。旧名 6to5 ([ECMAScript 6]() → ECMAScript 5)。
 
+対応状況は [ECMAScript 6 compatibility table](http://kangax.github.io/compat-table/es6/#babel) を参照のこと。逆に、Babel では動くが ECMAScript 的には不正というパターンがある可能性もある。
+
 # インストール
 
 ```
