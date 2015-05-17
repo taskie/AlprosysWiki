@@ -1,5 +1,9 @@
 未整理オブ未整理。
 
+# ディストリビューション
+
+* [Arch Linux](Linux/Arch Linux)
+
 # 参考ページ
 
 * [ジャンル別UNIXコマンド一覧 (*BSD/Linux)](http://x68000.q-e-d.net/~68user/unix/genre.html)
@@ -27,10 +31,6 @@
 * [オレオレ証明書をopensslで作る（詳細版） - ろば電子が詰まっている](http://d.hatena.ne.jp/ozuma/20130511/1368284304)
 
 * [linux - Best way to kill all child processes - Stack Overflow](http://stackoverflow.com/questions/392022/best-way-to-kill-all-child-processes)
-
-* [さくらVPS(v3) にArchLinux (2013.04.01-dual.iso) をISO イメージからインストールする — kenkovlog](http://blog.kenkov.jp/2013/04/20/archlinuxinstall.html)
-* [Arch Linux インストール から Xfce 快適環境を構築するまで - Qiita](http://qiita.com/macchaberrycream/items/1dfabe8b710dc638e3f9)
-* [archLinux - Arch Linuxとパッケージシステム - Qiita](http://qiita.com/boronology/items/6ea8a4dd540c5980627b)
 
 * [CentOSで自宅サーバー構築](http://centossrv.com/)
 * [yum upgradeとyum updateの違いについて勘違いしてた - kanonjiの日記](http://d.hatena.ne.jp/kanonji/20121120/1353387898)

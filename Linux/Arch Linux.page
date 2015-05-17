@@ -1,0 +1,19 @@
+# 参考ページ
+
+* [さくらVPS(v3) にArchLinux (2013.04.01-dual.iso) をISO イメージからインストールする — kenkovlog](http://blog.kenkov.jp/2013/04/20/archlinuxinstall.html)
+* [Arch Linux インストール から Xfce 快適環境を構築するまで - Qiita](http://qiita.com/macchaberrycream/items/1dfabe8b710dc638e3f9)
+* [archLinux - Arch Linuxとパッケージシステム - Qiita](http://qiita.com/boronology/items/6ea8a4dd540c5980627b)
+
+# Tips
+
+## `yaourt -G hoge` と `yaourt -U hoge.tar.xz`
+
+例：vmd
+
+```
+$ yaourt -G vmd
+$ cd vmd
+$ mv /path/to/vmd-1.9.2.bin.LINUXAMD64.opengl.tar.gz .
+$ makepkg
+$ yaourt -U vmd-1.9.2-1-x86_64.pkg.tar.xz
+```
