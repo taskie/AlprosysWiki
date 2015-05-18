@@ -1,0 +1,12 @@
+# 公式ページ
+
+* [tmux](http://tmux.sourceforge.net/)
+
+# 依存
+
+* [libevent](http://libevent.org/)
+
+# 参考リンク
+
+* [Vim - ターミナルマルチプレクサ tmux をカスタマイズする - Qiita](http://qiita.com/b4b4r07/items/01359e8a3066d1c37edc)
+* [Macのtmuxでクリップボードを使用、あとtmuxの自動起動とか - よんちゅBlog](http://yonchu.hatenablog.com/entry/20120514/1337026014)
