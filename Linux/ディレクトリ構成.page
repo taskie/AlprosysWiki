@@ -1,0 +1,32 @@
+# 参考ページ
+
+* [みんなのホームディレクトリ下の構成を教えてください - まめめも](http://d.hatena.ne.jp/ku-ma-me/20120330/p1)
+* [自分のホームディレクトリ下の構成 - すぎゃーんメモ](http://d.hatena.ne.jp/sugyan/20120331/1333122341)
+
+# ぼくのかんがえたホームディレクトリ下の構成
+
+## サブディレクトリ
+
+### ~/opt
+
+* 自分でビルドしたアプリケーションをインストールする
+* 例えば、git v2.4.1 は ~/opt/git/2.4.1 以下にインストールされる
+    + 具体的には `./configure --prefix=$HOME/opt/git/2.4.1` する
+
+### ~/local
+
+* local 以下は [Filesystem Hierarchy Standard](http://ja.wikipedia.org/wiki/Filesystem_Hierarchy_Standard) に従う
+* ~/local/bin に PATH、~/local/lib (~local/lib64) に LD_LIBRARY_PATH を通す
+* [XStow](http://xstow.sourceforge.net/) を使い `xstow -vt ~/local ~/opt/git/2.4.1` として ~/opt 以下のアプリケーションを ~/local にインストールする
+    + 改善の余地あり？
+
+### ~/src
+
+* tarball とその展開後ディレクトリ、git clone されたもの等が置かれる
+* 適度に整理したいが現状放置されている
+
+## 展望
+
+### ソフトウェアダウンロードの自動化
+
+* Arch Linux の PKGBUILD を流用したい
