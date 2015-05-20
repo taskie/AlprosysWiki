@@ -3,6 +3,11 @@
 # ディストリビューション
 
 * [Arch Linux](Linux/Arch Linux)
+* [CentOS](Linux/CentOS)
+
+# Tips
+
+* [ディレクトリ構成](Linux/ディレクトリ構成)
 
 # 参考ページ
 
@@ -14,11 +19,7 @@
 
 * [コピペから脱出！iptablesの仕組みを理解して環境に合わせた設定をしよう | OXY NOTES](http://oxynotes.com/?p=6361)
 
-* [みんなのホームディレクトリ下の構成を教えてください - まめめも](http://d.hatena.ne.jp/ku-ma-me/20120330/p1)
-* [自分のホームディレクトリ下の構成 - すぎゃーんメモ](http://d.hatena.ne.jp/sugyan/20120331/1333122341)
-
 * [Coreutils - Wikipedia](http://ja.wikipedia.org/wiki/Coreutils)
-* [Filesystem Hierarchy Standard - Wikipedia](http://ja.wikipedia.org/wiki/Filesystem_Hierarchy_Standard)
 
 * [Linux共有ライブラリの簡単なまとめ - wagavulinの日記](http://d.hatena.ne.jp/wagavulin/20091026/1256577635)
 * [Linux の共有ライブラリを作るとき PIC でコンパイルするのはなぜか - bkブログ](http://0xcc.net/blog/archives/000107.html)
@@ -32,6 +33,3 @@
 
 * [linux - Best way to kill all child processes - Stack Overflow](http://stackoverflow.com/questions/392022/best-way-to-kill-all-child-processes)
 
-* [CentOSで自宅サーバー構築](http://centossrv.com/)
-* [yum upgradeとyum updateの違いについて勘違いしてた - kanonjiの日記](http://d.hatena.ne.jp/kanonji/20121120/1353387898)
-* [CentOS7 firewalldの設定方法](http://www.unix-power.net/centos7/firewalld.html)
