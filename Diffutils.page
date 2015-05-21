@@ -1,0 +1,148 @@
+---
+categories: gnu diffutils diff git patch
+...
+
+# 公式ページ
+
+* [Diffutils - GNU Project - Free Software Foundation](http://www.gnu.org/software/diffutils/)
+
+# 実行例
+
+```
+$ cat a.txt
+2
+3
+5
+7
+11
+13
+17
+19
+```
+
+```
+$ cat b.txt
+0
+1
+1
+2
+3
+5
+8
+13
+```
+
+```
+$ diff a.txt b.txt
+0a1,3
+> 0
+> 1
+> 1
+4,5c7
+< 7
+< 11
+---
+> 8
+7,8d8
+< 17
+< 19
+```
+
+`-u` オプションを付けると [Git]() でよく見るような unified 形式で出力される。
+特別な理由が無ければ常に `-u` を付けておくべきだろう。
+
+* [diffによるunified形式の意味について - 主にボードゲームやプログラミング - k.bigwheelの日記](http://d.hatena.ne.jp/den8/20100622/1277226958)
+
+```
+$ diff -u a.txt b.txt
+--- a.txt       2015-05-22 08:28:47.000000000 +0900
++++ b.txt       2015-05-22 08:33:31.000000000 +0900
+@@ -1,8 +1,8 @@
++0
++1
++1
+ 2
+ 3
+ 5
+-7
+-11
++8
+ 13
+-17
+-19
+```
+
+# git diff を使う
+
+* [colordiffを使わずにdiffをカラー表示する - ももいろテクノロジー](http://inaz2.hatenablog.com/entry/2014/07/03/003551)
+
+git 管理下にないファイルでも git diff は使える（実際はカラー表示される）。
+
+```
+$ git diff a.txt b.txt
+diff --git a/a.txt b/b.txt
+index 428d36f..fd3fbab 100644
+--- a/a.txt
++++ b/b.txt
+@@ -1,8 +1,8 @@
++0
++1
++1
+ 2
+ 3
+ 5
+-7
+-11
++8
+ 13
+-17
+-19
+```
+
+# patch
+
+## 公式ページ
+
+* [GNU patch - 概要 [Savannah]](http://savannah.gnu.org/projects/patch)
+
+## パッチを充てる
+
+`patch` に与えるファイル名を省略した場合、適用先はパッチファイルの内容（1 行目）から判断される。
+
+```
+$ diff -u a.txt b.txt > a2b.patch
+$ patch -u < a2b.patch
+patching file a.txt
+$ cat a.txt
+0
+1
+1
+2
+3
+5
+8
+13
+$ diff a.txt b.txt
+```
+
+## パッチを逆に適用する（リバースパッチ）
+
+ついでに `patch` に与えるファイル名を省略しない場合を示す（省略した場合 a.txt に適用される）。
+
+```
+$ patch -uR b.txt < a2b.patch
+patching file b.txt
+$ cat b.txt
+2
+3
+5
+7
+11
+13
+17
+19
+```
+
+## 参考ページ
+
+* [diff & patch コマンドでのパッチを適用する方法 - hogehoge foobar Blog Style5](http://d.hatena.ne.jp/mrgoofy33/20101019/1287500809)
