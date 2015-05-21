@@ -12,6 +12,8 @@ categories: git
 * [gitでアレを元に戻す108の方法 - TIM Labs](http://labs.timedia.co.jp/2011/08/git-undo-999.html)
 * [gitリポジトリを特定のcommitバージョンまで戻す方法 - AorBorF](http://d.hatena.ne.jp/amacou/20090117/1232201229)
 * [GitのHEAD^ HEAD~やらダブルドット トリプルドットやら | アライドアーキテクツ エンジニアブログ](http://tech.aainc.co.jp/?p=6740)
+* [Git pullを使うべきでない３つの理由 - DQNEO起業日記](http://dqn.sakusakutto.jp/2012/11/git_pull.html)
+* [Git 再入門 リモートリポジトリを使った作業](http://www.yunabe.jp/docs/relearning_git_remote.html)
 
 * [git submodule は癖がすごいとの噂だったが素直につきあっていけそうという話 | deadwood](http://www.d-wood.com/blog/2014/05/22_6257.html)
 
