@@ -12,6 +12,7 @@ categories: shell zsh
 * [BashとZshの違いでのハマりどころ](http://rcmdnk.github.io/blog/2013/12/26/computer-bash-zsh/)
 
 * [zsh補完関数の書き方(訳)](http://www.ayu.ics.keio.ac.jp/~mukai/translate/write_zsh_functions.html)
+* [zsh補完関数を自作すると便利 - はこべブログ ♨](http://hakobe932.hatenablog.com/entry/2012/02/13/214934)
 * [zsh で source して使うプラグインを作るのは止めにしよう - Qiita](http://qiita.com/mollifier/items/6fdeff2750fe80f830c8)
 
 * [zshのchpwdの設定 - よんちゅBlog](http://yonchu.hatenablog.com/entry/20120507/1336409280)
