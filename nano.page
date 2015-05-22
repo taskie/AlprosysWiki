@@ -1,0 +1,54 @@
+---
+categories: nano gnu
+...
+
+# 公式ページ
+
+* [GNU nano](http://www.nano-editor.org/)
+
+# .nanorc
+
+```nanorc
+# Basic Settings
+
+set autoindent
+set tabsize 4
+set mouse
+set nowrap
+set softwrap
+set smooth
+set morespace
+set cut
+set multibuffer
+
+# Key Bind
+
+bind ^A home        main
+bind ^C copytext    main
+bind ^E end         main
+bind ^F whereis     main
+bind ^G gotoline    main
+bind ^I indent      main
+bind ^W exit        main
+bind ^M enter       main
+bind ^S writeout    main
+bind ^R replace     main
+bind ^V uncut       main
+bind ^X cut         main
+bind ^Y redo        main
+bind ^Z undo        main
+bind ^Space mark    main
+
+# Syntax Highlighting
+
+include "/usr/share/nano/c.nanorc"
+include "/usr/share/nano/nanorc.nanorc"
+include "/usr/share/nano/python.nanorc"
+include "/usr/share/nano/sh.nanorc"
+```
+
+# 参考ページ
+
+* [NANORC](http://www.nano-editor.org/dist/v2.1/nanorc.5.html)
+* [GNU nanoを使い始めた « blog.hekt.org](http://blog.hekt.org/archives/4882)
+* [nanoエディタでWindowsっぽいキーバインド - Qiita](http://qiita.com/tadsan/items/5e825271d6eabac14810)
