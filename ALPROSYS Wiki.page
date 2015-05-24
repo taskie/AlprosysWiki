@@ -1,6 +1,6 @@
 # About this Wiki
 
-とりあえず自分用のリンク集として運用中。
+自分用のリンク集・備忘録として運用中。
 
 * [taskie/AlprosysWiki (GitHub)](https://github.com/taskie/AlprosysWiki)
 
@@ -13,7 +13,8 @@
 
 * [Linux]()
 * [Git]()
-* [SSH]()
+* [OpenSSH]()
+* [OpenSSL]()
 * [bash]()
 * [Zsh]()
 * [tmux]()
