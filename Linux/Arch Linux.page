@@ -20,3 +20,9 @@ $ mv /path/to/vmd-1.9.2.bin.LINUXAMD64.opengl.tar.gz .
 $ makepkg
 $ yaourt -U vmd-1.9.2-1-x86_64.pkg.tar.xz
 ```
+
+## pacman の cache を clean する
+
+```
+$ yaourt -Sc
+```
