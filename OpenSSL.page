@@ -1,0 +1,253 @@
+---
+categories: openssl ssl
+...
+
+# 公式ページ
+
+* [OpenSSL: The Open Source toolkit for SSL/TLS](https://www.openssl.org/)
+* 別実装
+    + [LibreSSL](http://www.libressl.org/)
+
+# 参考ページ
+
+* [opensslでRSA暗号と遊ぶ - ろば電子が詰まっている](http://d.hatena.ne.jp/ozuma/20130510/1368114329)
+* [オレオレ証明書をopensslで作る（詳細版） - ろば電子が詰まっている](http://d.hatena.ne.jp/ozuma/20130511/1368284304)
+
+# 手順
+
+ここでは、
+
+* *.key: 秘密鍵 (RSA PRIVATE KEY)
+* *.pub: 公開鍵 (PUBLIC KEY)
+* *.csr: 証明書署名要求 (CERTIFICATE REQUEST)
+* *.crt: サーバ証明書 (CERTIFICATE)
+
+を生成する。
+
+## 秘密鍵生成
+
+```
+$ openssl genrsa 2048 > server.key
+```
+
+* RSA 暗号方式 ([Wikipedia](http://ja.wikipedia.org/wiki/RSA%E6%9A%97%E5%8F%B7))
+* 鍵長は 2048 bit 以上にすべき
+
+## 公開鍵生成
+
+* 「証明書署名要求生成」でどうせ生成されるので証明書を作る際には必要のない手順であるが一応記載
+
+```
+$ openssl rsa -pubout < server.key > server.pub
+```
+
+## 証明書署名要求生成
+
+```
+$ openssl req -new -key server.key > server.csr
+```
+
+* 秘密鍵のハッシュと公開鍵を含んだファイル
+* このファイルを認証局に送付する
+
+## サーバ証明書生成
+
+```
+$ openssl x509 -days 365 -req -signkey server.key < server.csr > server.crt
+```
+
+* [X.509 - Wikipedia](http://ja.wikipedia.org/wiki/X.509)
+* オレオレ証明書を作る
+* server.key で server.csr に電子署名し結果を server.crt に出力する
+* 有効期間 365 日
+
+# 生成例（ダミー）
+
+## 秘密鍵
+
+```
+$ openssl genrsa 512 > server.key
+Generating RSA private key, 512 bit long modulus
+........++++++++++++
+..............++++++++++++
+e is 65537 (0x10001)
+```
+
+```
+$ openssl rsa -text < server.key
+Private-Key: (512 bit)
+modulus:
+    00:b1:0c:6c:74:80:5d:2c:c8:a1:0d:a2:64:91:81:
+    12:8f:67:c7:45:c7:c5:5e:2f:32:89:88:6d:f9:aa:
+    1e:9e:82:5d:24:08:a9:dc:40:06:17:ff:7e:17:02:
+    b3:7e:52:7e:eb:83:15:b1:9e:30:1b:26:cf:5c:4d:
+    7c:5c:a7:5b:41
+publicExponent: 65537 (0x10001)
+privateExponent:
+    00:92:82:0d:5d:7a:bb:9f:cb:86:3a:9a:1f:4e:a8:
+    d8:8b:02:fd:cb:a8:bc:92:6b:cc:0e:33:6f:8e:22:
+    50:a4:29:2c:1d:6c:76:59:a1:77:75:a4:f3:c1:e5:
+    69:6d:fd:67:58:42:7c:d0:f1:de:f8:f1:e1:1a:8f:
+    ff:b0:9e:ee:e1
+prime1:
+    00:da:f6:13:36:15:8e:82:f3:09:dd:23:55:e9:52:
+    b6:ae:0c:df:39:2e:8f:10:d4:b0:af:60:d2:c5:a4:
+    98:78:eb
+prime2:
+    00:ce:ff:5b:0e:77:16:a3:66:14:bd:47:b1:91:ec:
+    96:29:f7:1a:30:54:c4:59:b8:5a:48:8e:ad:4e:73:
+    55:b1:83
+exponent1:
+    00:89:3a:c4:5b:97:33:14:1b:22:49:78:45:f5:cf:
+    a3:32:7e:5a:c0:c9:cf:5c:6b:10:b9:39:e3:9f:7f:
+    43:18:35
+exponent2:
+    33:35:5e:fc:6c:1f:b0:9a:af:64:c8:18:b8:c5:f3:
+    bc:3c:02:41:94:a6:e2:9f:45:ce:8f:65:76:73:f7:
+    ee:2b
+coefficient:
+    00:bc:b8:d4:31:08:31:01:06:b3:e1:f3:d9:64:3f:
+    ca:ff:31:80:5d:a0:a2:8a:1d:b7:65:3d:f5:1c:88:
+    c2:ec:db
+writing RSA key
+-----BEGIN RSA PRIVATE KEY-----
+MIIBPAIBAAJBALEMbHSAXSzIoQ2iZJGBEo9nx0XHxV4vMomIbfmqHp6CXSQIqdxA
+Bhf/fhcCs35SfuuDFbGeMBsmz1xNfFynW0ECAwEAAQJBAJKCDV16u5/LhjqaH06o
+2IsC/cuovJJrzA4zb44iUKQpLB1sdlmhd3Wk88HlaW39Z1hCfNDx3vjx4RqP/7Ce
+7uECIQDa9hM2FY6C8wndI1XpUrauDN85Lo8Q1LCvYNLFpJh46wIhAM7/Ww53FqNm
+FL1HsZHslin3GjBUxFm4WkiOrU5zVbGDAiEAiTrEW5czFBsiSXhF9c+jMn5awMnP
+XGsQuTnjn39DGDUCIDM1XvxsH7Car2TIGLjF87w8AkGUpuKfRc6PZXZz9+4rAiEA
+vLjUMQgxAQaz4fPZZD/K/zGAXaCiih23ZT31HIjC7Ns=
+-----END RSA PRIVATE KEY-----
+```
+
+## 公開鍵
+
+```
+$ openssl rsa -pubout < server.key > server.pub
+writing RSA key
+```
+
+```
+$ openssl rsa -text -pubin < server.pub
+Public-Key: (512 bit)
+Modulus:
+    00:b1:0c:6c:74:80:5d:2c:c8:a1:0d:a2:64:91:81:
+    12:8f:67:c7:45:c7:c5:5e:2f:32:89:88:6d:f9:aa:
+    1e:9e:82:5d:24:08:a9:dc:40:06:17:ff:7e:17:02:
+    b3:7e:52:7e:eb:83:15:b1:9e:30:1b:26:cf:5c:4d:
+    7c:5c:a7:5b:41
+Exponent: 65537 (0x10001)
+writing RSA key
+-----BEGIN PUBLIC KEY-----
+MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALEMbHSAXSzIoQ2iZJGBEo9nx0XHxV4v
+MomIbfmqHp6CXSQIqdxABhf/fhcCs35SfuuDFbGeMBsmz1xNfFynW0ECAwEAAQ==
+-----END PUBLIC KEY-----
+```
+
+## 証明書署名要求
+
+```
+$ openssl req -new -key server.key > server.csr
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:JP
+State or Province Name (full name) [Some-State]:Tokyo
+Locality Name (eg, city) []:
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:ALPROSYS DUMMY
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:dummy.hogefuga.alprosys.com
+Email Address []:
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+```
+
+```
+$ openssl req -text < server.csr
+Certificate Request:
+    Data:
+        Version: 0 (0x0)
+        Subject: C=JP, ST=Tokyo, O=ALPROSYS DUMMY, CN=dummy.hogefuga.alprosys.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (512 bit)
+                Modulus:
+                    00:b1:0c:6c:74:80:5d:2c:c8:a1:0d:a2:64:91:81:
+                    12:8f:67:c7:45:c7:c5:5e:2f:32:89:88:6d:f9:aa:
+                    1e:9e:82:5d:24:08:a9:dc:40:06:17:ff:7e:17:02:
+                    b3:7e:52:7e:eb:83:15:b1:9e:30:1b:26:cf:5c:4d:
+                    7c:5c:a7:5b:41
+                Exponent: 65537 (0x10001)
+        Attributes:
+            a0:00
+    Signature Algorithm: sha256WithRSAEncryption
+         55:bf:6f:b4:c7:97:07:40:3a:09:3b:6a:bc:3c:ab:41:04:29:
+         6b:7c:78:f2:4c:49:60:f8:6f:b2:63:40:22:8a:6b:18:ea:72:
+         f2:48:5f:5b:37:80:a4:a7:d1:52:e5:da:e7:bd:a5:bd:a6:3e:
+         1b:b2:24:9d:23:c5:74:b2:3e:b7
+-----BEGIN CERTIFICATE REQUEST-----
+MIIBFjCBwQIBADBcMQswCQYDVQQGEwJKUDEOMAwGA1UECAwFVG9reW8xFzAVBgNV
+BAoMDkFMUFJPU1lTIERVTU1ZMSQwIgYDVQQDDBtkdW1teS5ob2dlZnVnYS5hbHBy
+b3N5cy5jb20wXDANBgkqhkiG9w0BAQEFAANLADBIAkEAsQxsdIBdLMihDaJkkYES
+j2fHRcfFXi8yiYht+aoenoJdJAip3EAGF/9+FwKzflJ+64MVsZ4wGybPXE18XKdb
+QQIDAQABoAAwDQYJKoZIhvcNAQELBQADQQBVv2+0x5cHQDoJO2q8PKtBBClrfHjy
+TElg+G+yY0AiimsY6nLySF9bN4Ckp9FS5drnvaW9pj4bsiSdI8V0sj63
+-----END CERTIFICATE REQUEST-----
+```
+
+## サーバ証明書
+
+```
+$ openssl x509 -days 1 -req -signkey server.key < server.csr > server.crt
+Signature ok
+subject=/C=JP/ST=Tokyo/O=ALPROSYS DUMMY/CN=dummy.hogefuga.alprosys.com
+Getting Private key
+```
+
+```
+$ openssl x509 -text < server.crt
+Certificate:
+    Data:
+        Version: 1 (0x0)
+        Serial Number: 11154028877974243872 (0x9acb122afe1a8a20)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=JP, ST=Tokyo, O=ALPROSYS DUMMY, CN=dummy.hogefuga.alprosys.com
+        Validity
+            Not Before: May 24 15:21:43 2015 GMT
+            Not After : May 25 15:21:43 2015 GMT
+        Subject: C=JP, ST=Tokyo, O=ALPROSYS DUMMY, CN=dummy.hogefuga.alprosys.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (512 bit)
+                Modulus:
+                    00:b1:0c:6c:74:80:5d:2c:c8:a1:0d:a2:64:91:81:
+                    12:8f:67:c7:45:c7:c5:5e:2f:32:89:88:6d:f9:aa:
+                    1e:9e:82:5d:24:08:a9:dc:40:06:17:ff:7e:17:02:
+                    b3:7e:52:7e:eb:83:15:b1:9e:30:1b:26:cf:5c:4d:
+                    7c:5c:a7:5b:41
+                Exponent: 65537 (0x10001)
+    Signature Algorithm: sha256WithRSAEncryption
+         87:25:20:ec:f5:57:56:56:ec:74:b0:a3:db:66:6c:88:2f:65:
+         a4:96:89:42:4e:b8:04:ce:fc:3c:ac:e7:99:db:e1:9a:8b:42:
+         25:1a:db:b0:b4:df:60:4f:85:22:1c:78:16:12:89:4c:15:9e:
+         0d:bb:a2:2f:23:08:c7:06:0a:75
+-----BEGIN CERTIFICATE-----
+MIIBqjCCAVQCCQCayxIq/hqKIDANBgkqhkiG9w0BAQsFADBcMQswCQYDVQQGEwJK
+UDEOMAwGA1UECAwFVG9reW8xFzAVBgNVBAoMDkFMUFJPU1lTIERVTU1ZMSQwIgYD
+VQQDDBtkdW1teS5ob2dlZnVnYS5hbHByb3N5cy5jb20wHhcNMTUwNTI0MTUyMTQz
+WhcNMTUwNTI1MTUyMTQzWjBcMQswCQYDVQQGEwJKUDEOMAwGA1UECAwFVG9reW8x
+FzAVBgNVBAoMDkFMUFJPU1lTIERVTU1ZMSQwIgYDVQQDDBtkdW1teS5ob2dlZnVn
+YS5hbHByb3N5cy5jb20wXDANBgkqhkiG9w0BAQEFAANLADBIAkEAsQxsdIBdLMih
+DaJkkYESj2fHRcfFXi8yiYht+aoenoJdJAip3EAGF/9+FwKzflJ+64MVsZ4wGybP
+XE18XKdbQQIDAQABMA0GCSqGSIb3DQEBCwUAA0EAhyUg7PVXVlbsdLCj22ZsiC9l
+pJaJQk64BM78PKznmdvhmotCJRrbsLTfYE+FIhx4FhKJTBWeDbuiLyMIxwYKdQ==
+-----END CERTIFICATE-----
+```
