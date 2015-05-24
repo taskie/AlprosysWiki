@@ -1,6 +1,10 @@
 ---
-categories: ssh
+categories: openssh ssh
 ...
+
+# 公式ページ
+
+* [OpenSSH](http://www.openssh.com/)
 
 # 対話形式で公開鍵と秘密鍵を生成する
 
