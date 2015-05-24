@@ -1,0 +1,15 @@
+---
+categories: gnu coreutils
+...
+
+# 公式ページ
+
+* [Coreutils - GNU core utilities](http://www.gnu.org/software/coreutils/coreutils.html)
+
+# Tips
+
+## ディレクトリサイズをソートして表示 (human readable)
+
+```
+$ du -sch * | sort -h
+```
