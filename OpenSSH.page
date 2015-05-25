@@ -6,6 +6,11 @@ categories: openssh ssh
 
 * [OpenSSH](http://www.openssh.com/)
 
+# 参考ページ
+
+* [仙石浩明の日記: ssh-agent を screen の中から使う方法](http://www.gcd.org/blog/2006/09/100/)
+* [ssh-agentの使い方 - Qiita](http://qiita.com/isaoshimizu/items/84ac5a0b1d42b9d355cf)
+
 # 対話形式で公開鍵と秘密鍵を生成する
 
 ```
