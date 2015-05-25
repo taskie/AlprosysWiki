@@ -75,6 +75,7 @@ $ diff -u a.txt b.txt
 # git diff を使う
 
 * [colordiffを使わずにdiffをカラー表示する - ももいろテクノロジー](http://inaz2.hatenablog.com/entry/2014/07/03/003551)
+* [どこでも使える git diff と git apply - Qiita](http://qiita.com/uasi/items/905376f02ff029fb23f8)
 
 git 管理下にないファイルでも git diff は使える（実際はカラー表示される）。
 
