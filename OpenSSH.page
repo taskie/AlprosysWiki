@@ -6,15 +6,16 @@ categories: openssh ssh
 
 * [OpenSSH](http://www.openssh.com/)
 
-# 参考ページ
-
-* [仙石浩明の日記: ssh-agent を screen の中から使う方法](http://www.gcd.org/blog/2006/09/100/)
-* [ssh-agentの使い方 - Qiita](http://qiita.com/isaoshimizu/items/84ac5a0b1d42b9d355cf)
-
 # 対話形式で公開鍵と秘密鍵を生成する
 
 ```
 $ ssh-keygen -t rsa
+```
+
+# 秘密鍵のパスフレーズを変更する
+
+```
+$ ssh-keygen -pf ~/.ssh/id_rsa
 ```
 
 # 公開鍵を接続先の authorized_keys に書き込む
@@ -33,6 +34,30 @@ $ ssh-copy-id -i hoge_rsa.pub user@machine
 
 * [ShellScript - ssh の公開鍵の設定めんどい - Qiita](http://qiita.com/k_ui/items/72ada26499a3c182b47a)
 
+# ssh-agent の起動 (bash / zsh)
+
+```bash
+agent="$HOME/.ssh-agent-$USER"
+if [ -S "$SSH_AUTH_SOCK" ]; then
+    if [ ! -L "$SSH_AUTH_SOCK" ]; then
+	ln -snf "$SSH_AUTH_SOCK" $agent && export SSH_AUTH_SOCK=$agent
+    fi
+elif [ -S $agent ]; then
+    export SSH_AUTH_SOCK=$agent
+else
+    if [ -z "$TMUX" -a -z "$STY" ]; then
+	eval `SHELL=bash ssh-agent`
+	ssh-add
+    fi
+fi
+```
+
+## 参考ページ
+
+* [ssh-agentの使い方 - Qiita](http://qiita.com/isaoshimizu/items/84ac5a0b1d42b9d355cf)
+* [仙石浩明の日記: ssh-agent を screen の中から使う方法](http://www.gcd.org/blog/2006/09/100/)
+* [ssh-agentのforwardを利用し、ホストマシンとローカルVMの非公開鍵を共有する - MANA-DOT](http://blog.manaten.net/entry/ssh-agent-forward)
+
 # ~/.ssh/config の設定例
 
 ```
@@ -44,6 +69,7 @@ Host hoge
     GatewayPorts yes
     PermitLocalCommand yes
     LocalCommand tmux rename-window \<%n\>
+    ForwardAgent yes
 
 Host fuga
     ProxyCommand ssh -W %h:%p hoge
