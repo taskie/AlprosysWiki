@@ -8,6 +8,10 @@ categories: programming cxx boost
 * [Boost C++ Libraries](http://www.boost.org/)
     * [Boost Library Documentation](http://www.boost.org/doc/libs/)
 
+# 参考ページ
+
+* [Boostライブラリのビルド方法 - boostjp](http://boostjp.github.io/howtobuild.html)
+
 # ライブラリ
 
 [Spirit](Boost/Spirit)
