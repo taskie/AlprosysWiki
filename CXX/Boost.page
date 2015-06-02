@@ -14,6 +14,9 @@ categories: programming cxx boost
 
 # ライブラリ
 
+[Optional](Boost/Optional)
+:   安全な無効値
+
 [Spirit](Boost/Spirit)
 :   構文解析
 
