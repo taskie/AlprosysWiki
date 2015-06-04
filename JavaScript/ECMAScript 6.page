@@ -8,6 +8,7 @@ categories: javascript ecmascript
 
 # 参考ページ
 
+* [lukehoban/es6features](https://github.com/lukehoban/es6features)
 * [Mozilla における ECMAScript 6 のサポート - JavaScript | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/ECMAScript_6_support_in_Mozilla)
 * [ECMAScript 6 compatibility table](http://kangax.github.io/compat-table/es6/)
 * [ECMAScript 6の新しい構文をつかってみる#1 ｜ Developers.IO](http://dev.classmethod.jp/client-side/javascript/es6-2/)
