@@ -1,0 +1,15 @@
+---
+categories: mariadb sql rdbms mysql
+...
+
+# データベース作成の一連の流れ
+
+```bash
+$ mysql -p -u root
+```
+
+```sql
+> CREATE USER some_user IDENTIFIED BY 'some_password';
+> CREATE DATABASE some_database;
+> GRANT ALL ON some_database TO some_user;
+```
