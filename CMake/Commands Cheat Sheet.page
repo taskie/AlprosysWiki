@@ -55,3 +55,45 @@ add_subdirectory(source_dir)
 ```
 target_link_libraries(<target> [item1 [item2 [...]]])
 ```
+
+# 例
+
+
+
+## 親 CMakeLists.txt (.)
+
+```cmake
+cmake_minimum_required(VERSION 2.8)
+project(hoge CXX)
+
+find_package(OpenMP)
+if (OPENMP_FOUND)
+   set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
+
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/submodules/cotire/CMake)
+include(cotire)
+
+include_directories(/usr/include /usr/include/eigen3)
+add_subdirectory(src)
+```
+
+## 子 CMakeLists.txt (./src)
+
+```cmake
+add_compile_options(-std=c++11)
+add_subdirectory(hoge)
+add_executable(hoge_app main.cc hoge.h)
+target_link_libraries(hoge_app hoge_core)
+cotire(hoge_app)
+```
+
+## 孫 CMakeLists.txt (./src/hoge)
+
+```cmake
+file(GLOB_RECURSE src *.cc *.h *.hpp)
+add_compile_options(-std=c++11)
+add_library(hoge_core ${src})
+cotire(hoge_core)
+```
