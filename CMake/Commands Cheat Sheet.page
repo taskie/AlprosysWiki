@@ -1,0 +1,57 @@
+---
+categories: cmake
+...
+
+# 公式ページ
+
+* [cmake-commands(7) — CMake 3.2.2 Documentation](http://www.cmake.org/cmake/help/v3.2/manual/cmake-commands.7.html)
+
+# 一覧
+
+## 変数定義 (`set`)
+
+* [set — CMake 3.2.2 Documentation](http://www.cmake.org/cmake/help/v3.2/command/set.html)
+
+```
+set(<variable> <value>)
+```
+
+## コンパイルオプションの追加 (`add_definitions`)
+
+* [add_definitions — CMake 3.2.2 Documentation](http://www.cmake.org/cmake/help/v3.2/command/add_definitions.html)
+
+```
+add_definitions(-DFOO -DBAR ...)
+```
+
+## 生成する実行ファイルを定義 (`add_executable`)
+
+* [add_executable — CMake 3.2.2 Documentation](http://www.cmake.org/cmake/help/v3.2/command/add_executable.html)
+
+```
+add_executable(<name> source1 [source2 ...])
+```
+
+## 生成するライブラリファイルを定義 (`add_library`)
+
+* [add_library — CMake 3.2.2 Documentation](http://www.cmake.org/cmake/help/v3.2/command/add_library.html)
+
+```
+add_library(<name> [STATIC | SHARED | MODULE] source1 [source2 ...])
+```
+
+## サブ CMake プロジェクトの追加 (`add_subdirectory`)
+
+* [add_subdirectory — CMake 3.2.2 Documentation](http://www.cmake.org/cmake/help/v3.2/command/add_subdirectory.html)
+
+```
+add_subdirectory(source_dir)
+```
+
+## リンクするライブラリの追加 (`target_link_libraries`)
+
+* [target_link_libraries — CMake 3.2.2 Documentation](http://www.cmake.org/cmake/help/v3.2/command/target_link_libraries.html)
+
+```
+target_link_libraries(<target> [item1 [item2 [...]]])
+```
