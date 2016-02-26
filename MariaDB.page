@@ -13,3 +13,8 @@ $ mysql -p -u root
 > CREATE DATABASE some_database;
 > GRANT ALL ON some_database.* TO some_user;
 ```
+
+# 参考リンク
+
+* [MySQL/PostgreSQLなどデータベースの学習ならDBOnline](http://www.dbonline.jp/)
+* [MySQLクイック・リファレンス](http://www.bitscope.co.jp/tep/MySQL/quickMySQL.html)
