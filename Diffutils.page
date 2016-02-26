@@ -78,6 +78,7 @@ $ diff -u a.txt b.txt
 * [どこでも使える git diff と git apply - Qiita](http://qiita.com/uasi/items/905376f02ff029fb23f8)
 
 git 管理下にないファイルでも git diff は使える（実際はカラー表示される）。
+git 管理下のファイルと管理外のファイルの diff も正しく取りたい場合は `--no-index` オプションを付ける（`git diff --no-index` を alias にすると便利）。
 
 ```
 $ git diff a.txt b.txt
