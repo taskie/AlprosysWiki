@@ -7,6 +7,10 @@ categories: linux archlinux
 * [Arch Linux インストール から Xfce 快適環境を構築するまで - Qiita](http://qiita.com/macchaberrycream/items/1dfabe8b710dc638e3f9)
 * [archLinux - Arch Linuxとパッケージシステム - Qiita](http://qiita.com/boronology/items/6ea8a4dd540c5980627b)
 
+# インストール
+
+* [インストール例](Arch Linux/インストール例)
+
 # Tips
 
 ## `yaourt -G hoge` と `yaourt -U hoge.tar.xz`

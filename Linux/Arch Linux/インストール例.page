@@ -1,0 +1,422 @@
+（永遠に）未完成。
+
+# 参考ページ
+
+* [インストールガイド - ArchWiki](https://wiki.archlinuxjp.org/index.php/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89)
+    * [Installation guide - ArchWiki](https://wiki.archlinux.org/index.php/Installation_guide)
+* [Arch Linux インストール から Xfce 快適環境を構築するまで - Qiita](http://qiita.com/macchaberrycream/items/1dfabe8b710dc638e3f9)
+
+# 手順
+
+## iso からブートする
+
+以下、`$EDITOR` は `nano` や `vim` を表す。
+
+### ネットワーク接続の設定をする
+
+VirtualBox 上で動かしている場合は最初から接続できているはず。
+
+Wi-Fi が利用できる場合は `wifi-menu` を使う。
+
+* [ワイヤレス設定 - ArchWiki](https://wiki.archlinuxjp.org/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A)
+* [ネットワーク設定 - ArchWiki](https://wiki.archlinuxjp.org/index.php/%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF%E8%A8%AD%E5%AE%9A)
+
+### キー配列を変更する
+
+以下はキーボードが JIS 配列の場合。
+
+```bash
+loadkeys jp106
+```
+
+### パーティションを切る
+
+`blkid` 等でデバイスを確認する。
+
+```bash
+blkid
+ls -l /dev/disk/by-id
+```
+
+以下は /dev/sda1 を /boot、/dev/sda2 を / にマウントするような例。
+
+```bash
+ARCH_DEVICE=/dev/HOGE
+ARCH_BOOT="${ARCH_DEVICE}1"
+ARCH_ROOT="${ARCH_DEVICE}2"
+```
+
+BIOS / UEFI とパーティションテーブルの方式の組み合わせは、
+
+* BIOS-MBR
+* BIOS-GPT
+* UEFI-GPT
+
+の 3 つがあるが、まず UEFI-GPT、それでダメなら BIOS-GPT を試すのが良さげ。
+
+VirtualBox は UEFI にちゃんと対応してない気がするので BIOS-GPT で。
+Surface Pro 3 では逆に UEFI 以外で起動できたことがない。
+
+#### BIOS-MBR
+
+`cfdisk` でパーティションを切り、両方を ext4 でフォーマットする例。
+パーティションテーブル作成時に msdos を選択する。
+
+```bash
+# BIOS-MBR: 1: Boot (bootable), 2: Root
+cfdisk $ARCH_DEVICE
+mkfs.ext4 $ARCH_BOOT
+mkfs.ext4 $ARCH_ROOT
+```
+
+#### BIOS-GPT
+
+`cgdisk` でパーティションを切る。
+`cgdisk` を使うとデフォルトでセクタ 34-2048 が空くので、最後に先頭に BIOS Boot Partition を作ると楽。
+
+```bash
+# BIOS-GPT: 3: BIOS (ef02), 1: Boot, 2: Root
+cgdisk $ARCH_DEVICE
+mkfs.ext4 $ARCH_BOOT
+mkfs.ext4 $ARCH_ROOT
+```
+
+#### UEFI-GPT
+
+`cgdisk` でパーティションを切る。
+Alignment を 34 に設定してからパーティションを切る（セクタ 34-2048 を空けない）方が起動に成功しやすい気がする[要出典]。
+
+`/boot` は FAT でフォーマットする必要がある（以下は FAT32 でフォーマットする例）。
+
+```bash
+# UEFI-GPT: 1: EFI (ef00), 2: Root
+cgdisk $ARCH_DEVICE
+mkfs.vfat -F 32 $ARCH_BOOT
+mkfs.ext4 $ARCH_ROOT
+```
+
+#### おまけ：ディスク全体を btrfs でフォーマットする
+
+用途によってはこれで充分かもしれない。
+
+```bash
+mkfs.btrfs $ARCH_DEVICE
+```
+
+swap ファイルを作れないのが最大の難点。
+
+* [パーティショニング - Btrfs - ArchWiki](https://wiki.archlinuxjp.org/index.php/Btrfs#.E3.83.91.E3.83.BC.E3.83.86.E3.82.A3.E3.82.B7.E3.83.A7.E3.83.8B.E3.83.B3.E3.82.B0)
+
+### パーティションをマウントする
+
+```bash
+mount $ARCH_ROOT /mnt
+mkdir /mnt/boot
+mount $ARCH_BOOT /mnt/boot
+```
+
+### パッケージリポジトリのミラーリストを編集する
+
+安定の JAIST、瞬間最大風速の tsukuba といった趣きがある[要出典]。
+tsukuba → JAIST の順にサーバ URL をファイルの先頭に持ってくると良いかもしれない。
+
+```bash
+$EDITOR /etc/pacman.d/mirrorlist
+```
+
+### pacstrap で base のソフトウェアをインストールする
+
+```bash
+pacstrap /mnt base base-devel
+```
+
+iso でなく普段使いの Arch から arch-install-script を使う場合、`-c` オプションを付けるとホストにあるパッケージのキャッシュを利用してくれる。
+
+実は base-devel は無くても起動はするが、`gcc`, `make`, `sudo` あたりが入らず後々面倒なことになるので素直に入れておいた方がよい。
+
+* [Arch Linux - base (x86_64) - Group Details](https://www.archlinux.org/groups/x86_64/base/)
+* [Arch Linux - base-devel (x86_64) - Group Details](https://www.archlinux.org/groups/x86_64/base-devel/)
+
+### /etc/fstab を作成する
+
+```bash
+genfstab -U -p /mnt >> /mnt/etc/fstab
+```
+
+### arch-chroot で新しい環境の中に入る
+
+```bash
+arch-chroot /mnt
+```
+
+## arch-chroot 環境内
+
+### エディタ等のツールをインストールする
+
+```bash
+pacman -S emacs-nox vim
+```
+
+`vi`, `nano` は base に含まれている。
+
+```bash
+pacman -S zsh tmux
+pacman -S wget git openssh
+```
+
+### ロケールを設定する
+
+大抵の場合 en_US.UTF-8 と ja_JP.UTF-8 をコメントアウトすることになる。
+
+```bash
+$EDITOR /etc/locale.gen
+locale-gen
+```
+
+バーチャルコンソールだと日本語が化けるので X を入れるまでは en_US.UTF-8 とした方がよい。
+
+```bash
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+export LANG=en_US.UTF-8
+```
+
+localectl を使うのが systemd way かもしれない（未確認）。
+
+### キー配列を設定する
+
+loadkey の設定は次回以降の起動でリセットされるため vconsole.conf に記載しておく。
+
+```bash
+echo KEYMAP=jp106 >> /etc/vconsole.conf
+```
+
+### 時刻を設定する
+
+```bash
+ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+hwclock --systohc --utc
+```
+
+Windows は UTC ではなく localtime を使うためデュアルブートさせる場合は注意。
+
+timedatectl を使うのが systemd way かもしれない（未確認）。
+
+### ホストネームを設定する
+
+```bash
+echo "your-host-name" > /etc/hostname
+```
+
+### root のパスワードを設定する
+
+```bash
+passwd
+```
+
+### Intel のマイクロコードをインストールする
+
+```bash
+pacman -S intel-ucode
+```
+
+Intel の CPU を使っている人はインストールした方がよいかもしれない。
+
+### ブートローダーをインストールする
+
+#### BIOS
+
+grub を使う。
+
+```bash
+pacman -S grub os-prober
+grub-install --recheck $ARCH_DEVICE
+$EDITOR /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+#### UEFI
+
+systemd の `bootctl` を使う。
+セキュアブート等が絡むと途端に面倒になるので ArchWiki を睨みながら設定する。
+
+```bash
+bootctl install
+$EDITOR /boot/loader/loader.conf
+$EDITOR /boot/loader/entries/your-entry.conf
+```
+
+* [systemd-boot - ArchWiki](https://wiki.archlinuxjp.org/index.php/Systemd-boot)
+
+### 任意：再起動する
+
+grub や bootctl の設定に自信が無い場合はここで再起動した方がいいかもしれない。
+
+1. ^D 入力か `exit` コマンドで arch-chroot 環境を抜ける
+2. `umount -R /mnt` でディスクをアンマウントする
+3. `shutdown -r now` で再起動する
+4. Arch Linux をインストールしたディスクから起動する
+
+起動に成功した場合、再起動してまた iso からブートする。
+（まだネットワーク接続回りのツールを入れていないのでこのまま pacman で環境構築を続けることはできない。）
+
+起動に失敗した場合も、iso からブートして設定をやり直すことができる（パーティションの切り方が悪い場合は最初からやり直しになるが）。
+
+iso からブート後、
+
+1. ネットワーク接続の設定をする
+2. キー配列を変更する
+3. ディスクをマウントする
+4. arch-chroot する
+
+### ユーザを追加する
+
+```bash
+ARCH_USERNAME="yourname"
+useradd -m $ARCH_USERNAME
+passwd $ARCH_USERNAME
+```
+
+`useradd` の `-m` はホームディレクトリを作成するオプション。
+
+```bash
+gpasswd -a $ARCH_USERNAME wheel
+visudo
+```
+
+`gpasswd` でユーザを `wheel` に追加し、`visudo` で `wheel` の例の行をコメントアウトするのが定石っぽい。
+
+```bash
+chsh $ARCH_USERNAME
+```
+
+個人的には `/bin/zsh` を利用している。
+
+### デスクトップ環境 (Xfce) をインストールする
+
+```bash
+pacman -S xorg-server xorg-drivers
+```
+
+```bash
+pacman -S xfce4 xfce4-goodies
+```
+
+```bash
+pacman -S gnome-keyring libgnome-keyring seahorse
+pacman -S firefox
+```
+
+### ディスプレイマネージャ (LightDM) をインストールする
+
+```bash
+pacman -S lightdm lightdm-gtk-greeter lightdm-gtk-greeter-settings
+systemctl enable lightdm
+```
+
+### IME (Fcitx) をインストールする
+
+```bash
+pacman -S fcitx-im fcitx-configtool
+```
+
+```bash
+pacman -S fcitx-skk skk-jisyo
+```
+
+### NetworkManager をインストールする
+
+GUI 環境の場合 NetworkManager を使うのが一番楽。
+サーバの場合 `systemd-networkd` を使うのが systemd way かもしれない（未確認）。
+
+* [systemd-networkd - ArchWiki](https://wiki.archlinuxjp.org/index.php/Systemd-networkd)
+
+```bash
+pacman -S networkmanager network-manager-applet
+systemctl enable NetworkManager
+```
+
+### おまけ：VirtualBox Guest Addition
+
+```bash
+pacman -S virtualbox-guest-utils
+```
+
+X 環境を利用しない場合は `virtualbox-guest-utils-nox` をインストールする。
+
+`/etc/modules-load.d/virtualbox.conf` のようなファイルを作成し、以下を記載する。
+
+```
+vboxguest
+vboxvideo
+vboxsf
+```
+
+### arch-chroot 環境を抜け、ディスクをアンマウントし再起動する
+
+^D を入力するか `exit` コマンドを打ち arch-chroot 環境を抜ける。
+
+```bash
+umount -R /mnt
+shutdown -r now
+```
+
+## 再起動後
+
+自動で LightDM の画面が表示されて Xfce セッションに入れたら成功。
+
+## その後
+
+### 各種ツール
+
+```bash
+pacman -S archlinux-keyring lsb-release
+pacman -S archey3
+pacman -S arch-install-scripts
+```
+
+### ディスク管理
+
+pacman -S \
+    gptfdisk gparted gpart \
+    dosfstools mtools btrfs-progs exfat-utils ntfs-3g
+
+### yaourt
+
+`/etc/pacman.conf` に以下を追記
+
+```
+[archlinuxfr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch
+```
+
+```bash
+pacman -Syyu
+pacman -S yaourt
+```
+
+### 個人的な設定
+
+yaourt（というより makepkg）は root では動作しないので注意。
+
+以下、公式リポジトリにあるパッケージは `sudo pacman -S`、AUR 上にあるものは `yaourt -S` と書き分ける。
+実際は `yaourt -S` で公式のパッケージも透過的にインストールできる。
+
+```bash
+sudo pacman -S ttf-inconsolata
+sudo pacman -S faenza-icon-theme
+sudo gtk-update-icon-cache /usr/share/icons/Faenza
+```
+
+```bash
+yaourt -S pkgcacheclean
+```
+
+```bash
+yaourt -S ttf-ohruri otf-ipaexfont
+```
+
+```bash
+yaourt -S numix-circle-icon-theme-git
+sudo gtk-update-icon-cache /usr/share/icons/Numix-Circle-Light
+```
