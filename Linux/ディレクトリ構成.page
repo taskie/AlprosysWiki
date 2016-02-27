@@ -23,14 +23,12 @@ categories: linux
 * ~/local/bin に PATH、~/local/lib (~local/lib64) に LD_LIBRARY_PATH を通す
 * [XStow](http://xstow.sourceforge.net/) を使い `xstow -vt ~/local ~/opt/git/2.4.1` として ~/opt 以下のアプリケーションを ~/local にインストールする
     + 改善の余地あり？
+    + [GNU Stow](https://www.gnu.org/software/stow/) の方が最近更新されてる
+    + [porg](http://porg.sourceforge.net/) というのもあるらしい
+* ディレクトリ名は GNOME や stack (Haskell) が使ってる ~/.local の方がいい気がしてきた
 
 ### ~/src
 
 * tarball とその展開後ディレクトリ、git clone されたもの等が置かれる
 * 適度に整理したいが現状放置されている
-
-## 展望
-
-### ソフトウェアダウンロードの自動化
-
-* Arch Linux の PKGBUILD を流用したい
+* ~/src/git/2.4.1 を ~/opt/git/2.4.1 にインストールするみたいな命名法がよさそう
