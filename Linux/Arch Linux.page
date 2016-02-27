@@ -1,11 +1,12 @@
 ---
 categories: linux archlinux
 ...
-# 参考ページ
 
-* [さくらVPS(v3) にArchLinux (2013.04.01-dual.iso) をISO イメージからインストールする — kenkovlog](http://blog.kenkov.jp/2013/04/20/archlinuxinstall.html)
-* [Arch Linux インストール から Xfce 快適環境を構築するまで - Qiita](http://qiita.com/macchaberrycream/items/1dfabe8b710dc638e3f9)
-* [archLinux - Arch Linuxとパッケージシステム - Qiita](http://qiita.com/boronology/items/6ea8a4dd540c5980627b)
+# 公式ページ
+
+* [Arch Linux](https://www.archlinux.org/)
+    * [ArchWiki](https://wiki.archlinux.org/)
+        * [ArchWiki（日本語）](https://wiki.archlinuxjp.org/)
 
 # インストール
 
@@ -13,20 +14,57 @@ categories: linux archlinux
 
 # Tips
 
-## `yaourt -G hoge` と `yaourt -U hoge.tar.xz`
+## makepkg
 
-例：vmd
+### パッケージを xz で圧縮しない
 
-```
-$ yaourt -G vmd
-$ cd vmd
-$ mv /path/to/vmd-1.9.2.bin.LINUXAMD64.opengl.tar.gz .
-$ makepkg
-$ yaourt -U vmd-1.9.2-1-x86_64.pkg.tar.xz
+パッケージを他人と共有しない＆ディスク容量に余裕がある場合、やたら時間のかかる xz 圧縮はスキップした方がよい。
+
+/etc/makepkg.conf の `PKGEXT='.pkg.tar.xz'` を、
+
+```bash
+PKGEXT='.pkg.tar'
 ```
 
-## pacman の cache を clean する
+に書き換える。
 
+### 参考ページ
+
+* [makepkg - ArchWiki](https://wiki.archlinuxjp.org/index.php/Makepkg)
+    * [圧縮しないパッケージを作成する](https://wiki.archlinuxjp.org/index.php/Makepkg#.E5.9C.A7.E7.B8.AE.E3.81.97.E3.81.AA.E3.81.84.E3.83.91.E3.83.83.E3.82.B1.E3.83.BC.E3.82.B8.E3.82.92.E4.BD.9C.E6.88.90.E3.81.99.E3.82.8B)
+
+## yaourt
+
+### `-G`, `-U`, `-Sb`
+
+`yaourt -G` (`--getpkgbuild`) で PKGBUILD ファイルをダウンロードできる。
+`makepkg`（`-s` は依存関係を解決するオプション）して生成されたパッケージを `yaourt -U` でインストールできる。
+
+```bash
+yaourt -G nginx
+cd nginx
+$EDITOR PKGBUILD
+makepkg -s
+yaourt -U nginx-*.pkg.tar*
 ```
-$ yaourt -Sc
+
+`makepkg -si` を使えば makepkg がインストールまでやってくれる。
+
+```bash
+yaourt -G nginx
+cd nginx
+$EDITOR PKGBUILD
+makepkg -si
 ```
+
+`yaourt -Sb` で上記のことを全てやってくれる。
+即ち、AUR のパッケージをビルドするのと同じ流れで公式パッケージをビルドできる。
+
+```bash
+yaourt -Sb nginx
+```
+
+### 参考ページ
+
+* [Yaourt - ArchWiki](https://wiki.archlinuxjp.org/index.php/Yaourt)
+* [archLinux - Arch Linuxとパッケージシステム - Qiita](http://qiita.com/boronology/items/6ea8a4dd540c5980627b)
