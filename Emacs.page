@@ -22,6 +22,10 @@ helm
 :    [helm.elをインストールしてみた - プログラミングのメモ](http://konbu13.hatenablog.com/entry/2014/01/15/223014)
 :    [Helm をストレスなく使うための個人的な設定 - あらびき日記](http://d.hatena.ne.jp/a_bicky/20140104/1388822688)
 
+company-mode
+:    [company-mode for Emacs](http://company-mode.github.io/ "company-mode for Emacs")
+:    [emacsの補完用パッケージcompany-mode - Qiita](http://qiita.com/sune2/items/b73037f9e85962f5afb7 "emacsの補完用パッケージcompany-mode - Qiita")
+
 undo-tree
 :    [EmacsWiki: Undo Tree](http://www.emacswiki.org/emacs/UndoTree)
 :    [undo-tree.el の導入 - とりあえず暇だったし何となく始めたブログ](http://d.hatena.ne.jp/khiker/20100123/undo_tree)
