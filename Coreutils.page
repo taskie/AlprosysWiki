@@ -6,6 +6,10 @@ categories: gnu coreutils
 
 * [Coreutils - GNU core utilities](http://www.gnu.org/software/coreutils/coreutils.html)
 
+# 参考ページ
+
+* [GitHub - nanaka-inside/kaisetsu-CoreUtils: 解説CoreUtils の原稿](https://github.com/nanaka-inside/kaisetsu-CoreUtils)
+
 # Tips
 
 ## ディレクトリサイズをソートして表示 (human readable)
