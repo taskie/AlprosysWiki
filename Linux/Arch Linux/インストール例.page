@@ -346,18 +346,13 @@ systemctl enable NetworkManager
 ### おまけ：VirtualBox Guest Addition
 
 ```bash
-pacman -S virtualbox-guest-utils
+pacman -S virtualbox-guest-utils linux-headers
 ```
+
+DKMS モジュールとしてインストールされるため linux-headers が必要。
+以前のような modules-load.d にファイルを作成する作業は不要になった。
 
 X 環境を利用しない場合は `virtualbox-guest-utils-nox` をインストールする。
-
-`/etc/modules-load.d/virtualbox.conf` のようなファイルを作成し、以下を記載する。
-
-```
-vboxguest
-vboxvideo
-vboxsf
-```
 
 ### arch-chroot 環境を抜け、ディスクをアンマウントし再起動する
 
