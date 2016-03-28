@@ -2,16 +2,30 @@
 categories: mariadb sql rdbms mysql
 ...
 
-# データベース作成の一連の流れ
+# データベース作成時の一連の流れ
 
 ```bash
 $ mysql -p -u root
 ```
 
 ```sql
-> CREATE USER some_user IDENTIFIED BY 'some_password';
-> CREATE DATABASE some_database;
-> GRANT ALL ON some_database.* TO some_user;
+CREATE USER some_user IDENTIFIED BY 'some_password';
+CREATE DATABASE some_database;
+GRANT ALL ON some_database.* TO some_user;
+```
+
+# データベースエクスポート/インポート時の一連の流れ
+
+## エクスポート
+
+```bash
+$ mysqldump -p -u some_user some_database > some_database.sql
+```
+
+## インポート
+
+```bash
+$ mysql -p -u some_user some_database < some_database.sql
 ```
 
 # 参考リンク
