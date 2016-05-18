@@ -1,0 +1,74 @@
+# Win/Mac/Linux 共通
+
+## ブラウザ
+
+* Firefox
+    * [ツリー型タブ (Tree Style Tab)](https://addons.mozilla.org/ja/firefox/addon/tree-style-tab/) の存在
+* Google Chrome
+
+## テキストエディタ
+
+* Emacs
+* Visual Studio Code
+    * 複数ファイル編集用
+
+## フォント
+
+### プロポーショナル
+
+* M+ 2c/2p
+* Migu 1C
+* Koruri/Ohruri
+* 源暎ゴシック
+* IPAex明朝
+
+### 等幅
+
+* Migu 1M
+* Ricty Discord
+* Inconsolata
+
+## その他
+
+* [f.lux](https://justgetflux.com/)
+
+# Win/Mac 共通
+
+* SourceTree
+
+# CLI アプリケーション (OS X / Linux)
+
+* zsh
+* tmux
+* fzf
+* the_silver_searcher
+* vim
+
+# Windows
+
+* サクラエディタ
+* ExpLzh
+* RLogin
+* ConEmu
+* SKK日本語入力FEP
+* Visual Studio
+* AutoHotKey
+* MSYS2
+
+# OS X
+
+* CotEditor
+* Cyberduck
+* The Unarchiver
+* iTerm2
+* Clipy
+* AquaSKK
+* Xcode
+
+# Linux
+
+ディストリビューションは Arch Linux, Ubuntu 16.04 (LTS)
+
+* Xfce
+* fcitx-skk
+* LibreOffice
