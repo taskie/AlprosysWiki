@@ -38,10 +38,10 @@ categories: javascript
 [CoffeeScript](JavaScript/CoffeeScript)
 :   JavaScript トラップ回避用糖衣言語
 
-# ECMAScript 6 (ES6)
+# ECMAScript 2015 (ES2015 / ES6)
 
-[ECMAScript 6](JavaScript/ECMAScript 6)
-:   次期標準 (2015/06 リリース？)
+[ECMAScript 2015](JavaScript/ECMAScript 2015)
+:   標準規格 (2015/06 リリース)
 
 [Babel](JavaScript/Babel)
-:   ES6 構文を ES5 構文に変換
+:   ES2015 構文を ES5 構文に変換

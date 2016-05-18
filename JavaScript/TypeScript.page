@@ -33,3 +33,7 @@ $ tsc hoge.ts
 # Tips
 
 準備中
+
+# 参考ページ
+
+* [React & Webpack · TypeScript](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html)

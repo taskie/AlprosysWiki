@@ -13,6 +13,8 @@ CommonJS/AMD スタイルの JavaScript のモジュールをブラウザで使�
 ローダーやプラグインも多数用意されている。
 やたら多機能で gulp との棲み分けが悩ましい。
 
+最近は webpack だけでエコシステムを完結させてしまうのが主流っぽい[要出典]。
+
 # 参考ページ
 
 * [webpackを使い倒す - Thujikun blog](http://thujikun.github.io/blog/2014/12/07/webpack/)

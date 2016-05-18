@@ -11,6 +11,8 @@ categories: javascript altjs coffeescript
 
 JavaScript トラップ回避用糖衣言語。
 
+[ECMAScript 2015]() の普及により衰退しかけている。
+
 # インストール
 
 ```
@@ -31,7 +33,7 @@ $ coffee -c hoge.coffee
 
 # 利点
 
-`TypeScript` および `ECMAScript 6` にない利点のみを挙げる。
+[TypeScript]() および [ECMAScript 2015]() にない利点のみを挙げる。
 
 ## `this` / `this.` を `@` と書ける
 
@@ -74,6 +76,8 @@ promise
 コンマの抜けに悩まずに済む。
 この記法は CSON (CoffeeScript-Object-Notation) と呼ぶらしい。
 [bevry/cson (GitHub)](https://github.com/bevry/cson) の `cson2json`/`json2cson` で JSON との相互変換も可能。
+
+JavaScript 製ツールの設定ファイルは JSON ベースのものが多いので、この点だけでも利用価値はある（かもしれない）。
 
 ### JavaScript 版
 
@@ -120,7 +124,7 @@ f?()
 
 ## JavaScript の上位互換ではない
 
-JavaScript の（ほぼ）上位互換である [TypeScript]() のように JavaScript を生で直接埋め込めるわけではない（バッククオート(\`) で囲むことで埋め込むこと自体は可能）（module にして require するという手もあるが）。
+JavaScript のほぼ上位互換である [TypeScript]() のように JavaScript を生で直接埋め込めるわけではない（バッククオート(\`) で囲むことで埋め込むこと自体は可能）（module にして `require` するという手もあるが）。
 
 キーワードや演算子の意味も JavaScript と CoffeeScript とで異なっているものがあり新たに覚える必要がある（CoffeeScript の `==` は JavaScript の `===` に相当する等）。
 

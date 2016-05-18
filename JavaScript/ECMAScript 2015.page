@@ -1,0 +1,29 @@
+---
+categories: javascript ecmascript
+...
+
+# 概要
+
+JavaScript のベースである ECMAScript の現行規格。別名 ECMAScript 6th Edition (ES6)。
+
+# 公式ページ
+
+* [ECMAScript](http://www.ecmascript.org/)
+
+# 参考ページ
+
+* [lukehoban/es6features](https://github.com/lukehoban/es6features)
+* [ECMAScript 6: New Features: Overview and Comparison](http://es6-features.org/)
+* [ECMAScript 6 compatibility table](http://kangax.github.io/compat-table/es6/)
+* [Mozilla における ECMAScript 6 のサポート - JavaScript | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/ECMAScript_6_support_in_Mozilla)
+* [ECMAScript 6の新しい構文をつかってみる#1 ｜ Developers.IO](http://dev.classmethod.jp/client-side/javascript/es6-2/)
+* [ECMAScript 6の新しい構文をつかってみる#2 ｜ Developers.IO](http://dev.classmethod.jp/server-side/node-js-server-side/es6-3/)
+
+# ES2015 を試す
+
+[Babel]() を使う。
+
+# ES2015 文法一覧
+
+* [ECMAScript 6 Features](https://alprosys.com/es6/es6_features.html)
+    + [アウトライン](https://alprosys.com/es6/es6_features_ol.html)
