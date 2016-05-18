@@ -1,0 +1,45 @@
+* [M+ FONTS](https://mplus-fonts.osdn.jp/)
+* [IPAexフォント/IPAフォント](http://ipafont.ipa.go.jp/)
+* [Source Han Sans（源ノ角ゴシック）](https://github.com/adobe-fonts/source-han-sans)
+
+
+* [MigMix](http://mix-mplus-ipa.osdn.jp/migmix/)
+    * [M+とIPAの合成フォント](http://mix-mplus-ipa.osdn.jp/)
+    * M+ + IPA
+    * 2 ウェイト（Word 対応）
+* [Migu](http://mix-mplus-ipa.osdn.jp/migu/)
+    * [M+とIPAの合成フォント](http://mix-mplus-ipa.osdn.jp/)
+    * M+ + IPA
+    * 字形変更、行間調整 (1M, 2M)、かなプロポーショナル (1C)
+    * 2 ウェイト（Word 対応）
+* [Mgen+](http://jikasei.me/font/mgenplus/)
+    * [自家製フォント工房](http://jikasei.me/)
+    * M+ + 源ノ角ゴシック
+    * かなプロポーショナル (1cp, 1pp, 2cp, 2pp)
+* [源真ゴシック](http://jikasei.me/font/genshin/)
+    * [自家製フォント工房](http://jikasei.me/)
+    * 源ノ角ゴシック + M+
+    * TTF 化、行間調整（M+ 相当）、FontBBox 調整（Ps/Ai 対応）、かなプロポーショナル (P)
+* [源暎ゴシック](http://okoneya.jp/font/genei-gothic.html)
+    * [御琥祢屋](http://okoneya.jp/)
+    * 源ノ角ゴシック / 源ノ角ゴシック + 源真ゴシック (M)
+    * 字形変更、文字サイズ調整、FontBBox 調整（Ps/Ai 対応）、かなプロポーショナル (P)
+* [Koruri - Japanese TrueType font](http://koruri.lindwurm.biz/)
+    * M+ 1p + Open Sans
+* [Ohruri](https://github.com/Koruri/Ohruri)
+    * Mgen+ 1p + Open Sans
+* [Ricty](https://github.com/yascentur/Ricty)
+    * Migu 1M + Inconsolata
+    * ヒンティング保持 (v4.0.1-)
+    * 2 ウェイト
+* [Ricty Diminished](https://github.com/yascentur/RictyDiminished)
+    * Circle M+ 1m + Inconsolata
+    * ヒンティング保持 (v4.0.1-)
+    * 2 ウェイト
+* [Myrica](http://myrica.estable.jp/)
+    * 源真ゴシック + Inconsolata (Myrica) / Mgen+ + Inconsolata (MyricaM)
+    * ヒンティング保持
+
+# 参考ページ
+
+* [IllustratorでSource Han Sansのバウンディングボックスが縦長になる理由 | ものかの](http://tama-san.com/illustrator-boundingbox/)
